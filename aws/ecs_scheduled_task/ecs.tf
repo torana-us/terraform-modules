@@ -1,0 +1,25 @@
+resource "aws_ecs_task_definition" "this" {
+  family                = var.name
+  container_definitions = var.container_definitions
+  cpu                   = var.cpu
+  memory                = var.memory
+
+  execution_role_arn = var.execution_role_arn
+  task_role_arn      = var.task_role_arn
+
+  network_mode = "awsvpc"
+  requires_compatibilities = [
+    "FARGATE"
+  ]
+
+  # volume {
+  # }
+
+  # Not used in fargate
+  # placement_constraints {
+  # }
+
+  tags = {
+    "Name" = var.name
+  }
+}
