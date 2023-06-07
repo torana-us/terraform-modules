@@ -1,0 +1,37 @@
+---
+name: Release Drafter
+
+on:
+  push:
+    branches:
+      - master
+
+jobs:
+  release:
+    permissions:
+      contents: write
+      pull-requests: read
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      
+      - name: generate tag
+        id: gen_tag
+        run: |
+          tag=$(TZ=Asia/Tokyo date +%Y%m%d%H%M%S)
+          echo "tag: $tag"
+          echo "tag=$tag" >> "$GITHUB_OUTPUT"
+      
+      - name: push tag
+        run: |
+          git tag ${{ steps.gen_tag.outputs.tag }}
+          git push origin ${{ steps.gen_tag.outputs.tag }}
+      
+      - uses: release-drafter/release-drafter@v5
+        with:
+          publish: true
+          tag: ${{ steps.gen_tag.outputs.tag }}
+          version: ${{ steps.gen_tag.outputs.tag }}
+          name: ${{ steps.gen_tag.outputs.tag }}
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
