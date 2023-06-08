@@ -36,8 +36,8 @@ resource "aws_lambda_permission" "sns" {
 }
 
 module "lambda_role" {
-  source  = "app.terraform.io/torana/iam_role/aws"
-  version = "0.2.2"
+  source = "github.com/torana-us/terraform-modules//aws/iam_role?ref=20230607123054"
+
   # insert required variables here
   name = local.lambda_name
   policy_arns = [

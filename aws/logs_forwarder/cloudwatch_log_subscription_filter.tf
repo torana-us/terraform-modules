@@ -9,8 +9,7 @@ resource "aws_cloudwatch_log_subscription_filter" "datadog_logs_forwarder" {
 }
 
 module "subscription_filter_role" {
-  source  = "app.terraform.io/torana/iam_role/aws"
-  version = "v0.2.2"
+  source = "github.com/torana-us/terraform-modules//aws/iam_role?ref=20230607123054"
 
   name = "subscription-filter-role-for-logs-forwarder-${var.env}"
   service_list = [
