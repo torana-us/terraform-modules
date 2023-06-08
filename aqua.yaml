@@ -11,3 +11,4 @@ registries:
     ref: v4.14.1 # renovate: depName=aquaproj/aqua-registry
 packages:
   - name: hashicorp/terraform@v1.4.6
+  - name: terraform-linters/tflint@v0.46.1
