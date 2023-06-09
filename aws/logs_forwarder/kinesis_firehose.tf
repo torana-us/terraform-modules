@@ -61,7 +61,7 @@ resource "aws_kinesis_firehose_delivery_stream" "datadog_logs_forwarder" {
 }
 
 module "datadog_logs_forwarder_role" {
-  source = "github.com/torana-us/terraform-modules//aws/iam_role?ref=20230607123054"
+  source = "../iam_role"
 
   name = "datadog-logs-forwarder-role-${var.env}"
   service_list = [
