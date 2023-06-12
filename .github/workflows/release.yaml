@@ -2,12 +2,15 @@
 name: Release Drafter
 
 on:
-  push:
+  pull_request:
+    types:
+      - closed
     branches:
       - master
 
 jobs:
   release:
+    if: ${{ contains(github.event.pull_request.labels.*.name, 'release')  }}
     permissions:
       contents: write
       pull-requests: read
