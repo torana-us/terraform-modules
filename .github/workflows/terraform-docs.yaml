@@ -46,4 +46,7 @@ jobs:
           output-file: README.md
           output-method: inject
       
-      - run: echo ${{ steps.gen-docs.outputs.num_changed }}
+      - run: |
+          if [ 0 != "${{ steps.gen-docs.outputs.num_changed }}" ]; then
+            exit 1
+          fi
