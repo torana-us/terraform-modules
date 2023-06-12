@@ -1,0 +1,54 @@
+---
+name: Release Drafter
+
+on:
+  pull_request:
+
+jobs:
+  dirs:
+    runs-on: ubuntu-latest
+    outputs:
+      target_dirs: ${{ steps.uniq_dirs.outputs.d }}
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+      
+      - uses: technote-space/get-diff-action@v6
+        with:
+          PATTERNS: |
+            aws/**
+            datadog/**
+          
+      - name: uniq dirs
+        id: uniq_dirs
+        run: |
+          d=(echo "${{ env.GIT_DIFF }}" | xargs dirname | sort | uniq | jq -cnR '[inputs | select(length > 0)]')
+          echo "d=$d" >> "$GITHUB_OUTPUT"
+
+      - name: Render terraform docs and push changes back to PR
+        uses: terraform-docs/gh-actions@main
+        with:
+          working-dir: .
+          output-file: README.md
+          output-method: inject
+          git-push: "true"
+  docs:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    if: needs.dirs.outputs.target_dirs != '[]' && needs.dirs.outputs.target_dirs != ''
+    needs: [dirs]
+    strategy:
+      fail-fast: false
+      matrix:
+        target_dir: ${{ fromJson(needs.dirs.outputs.target_dirs) }}
+    steps:
+      - uses: actions/checkout@v3
+      
+      - name: Render terraform docs and push changes back to PR
+        uses: terraform-docs/gh-actions@main
+        with:
+          working-dir: ${{ matrix.target_dir }}
+          output-file: README.md
+          output-method: inject
+          git-push: "true"
