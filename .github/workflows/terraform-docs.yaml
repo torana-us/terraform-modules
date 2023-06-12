@@ -25,14 +25,7 @@ jobs:
         run: |
           d=$(echo ${{ env.GIT_DIFF }} | xargs dirname | sort | uniq | jq -cnR '[inputs | select(length > 0)]')
           echo "d=$d" >> "$GITHUB_OUTPUT"
-
-      - name: Render terraform docs and push changes back to PR
-        uses: terraform-docs/gh-actions@main
-        with:
-          working-dir: .
-          output-file: README.md
-          output-method: inject
-          git-push: "true"
+          
   docs:
     runs-on: ubuntu-latest
     timeout-minutes: 10
