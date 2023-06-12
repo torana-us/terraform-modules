@@ -44,4 +44,3 @@ jobs:
           working-dir: ${{ matrix.target_dir }}
           output-file: README.md
           output-method: inject
-          git-push: "true"
