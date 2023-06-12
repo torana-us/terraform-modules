@@ -12,3 +12,4 @@ registries:
 packages:
   - name: hashicorp/terraform@v1.4.6
   - name: terraform-linters/tflint@v0.46.1
+  - name: terraform-docs/terraform-docs@v0.16.0
