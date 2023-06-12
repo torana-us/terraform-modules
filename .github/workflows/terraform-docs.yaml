@@ -1,5 +1,5 @@
 ---
-name: Release Drafter
+name: terraform-docs
 
 on:
   pull_request:
@@ -23,7 +23,7 @@ jobs:
       - name: uniq dirs
         id: uniq_dirs
         run: |
-          d=(echo "${{ env.GIT_DIFF }}" | xargs dirname | sort | uniq | jq -cnR '[inputs | select(length > 0)]')
+          d=(echo ${{ env.GIT_DIFF }} | xargs dirname | sort | uniq | jq -cnR '[inputs | select(length > 0)]')
           echo "d=$d" >> "$GITHUB_OUTPUT"
 
       - name: Render terraform docs and push changes back to PR
