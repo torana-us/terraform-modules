@@ -3,7 +3,7 @@ module cc
 go 1.19
 
 require (
-	github.com/aws/aws-lambda-go v1.39.1
+	github.com/aws/aws-lambda-go v1.41.0
 	github.com/aws/aws-sdk-go v1.44.229
 	github.com/aws/aws-sdk-go-v2/config v1.18.19
 	github.com/aws/aws-sdk-go-v2/service/ssm v1.36.0
