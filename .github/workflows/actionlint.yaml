@@ -20,7 +20,7 @@ jobs:
 
       - name: Run actionlint with reviewdog
         timeout-minutes: 5
-        uses: reviewdog/action-actionlint@v1.37.0
+        uses: reviewdog/action-actionlint@v1.37.1
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           reporter: github-pr-review
