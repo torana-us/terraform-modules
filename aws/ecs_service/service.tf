@@ -2,7 +2,7 @@
 resource "aws_ecs_service" "this" {
   name                    = var.service_name
   cluster                 = var.cluster_id
-  task_definition         = aws_ecs_task_definition.this.arn
+  task_definition         = replace(aws_ecs_task_definition.this.arn, "/:\\d+$/", "")
   launch_type             = var.launch_type
   platform_version        = var.platform_version
   enable_ecs_managed_tags = true
