@@ -12,8 +12,8 @@ variable "stream_name_suffix" {
 
 variable "common_attributes_list" {
   type = set(object({
-      name = string
-      value = string
-    }))
+    name  = string
+    value = string
+  }))
   default = []
 }

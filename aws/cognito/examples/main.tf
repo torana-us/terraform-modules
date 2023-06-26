@@ -9,8 +9,8 @@ module "cognito" {
 }
 
 resource "random_string" "example" {
-  length = 10
-  special = false
-  numeric = true
+  length      = 10
+  special     = false
+  numeric     = true
   min_numeric = 10
 }
