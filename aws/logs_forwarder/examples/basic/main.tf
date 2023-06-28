@@ -1,7 +1,7 @@
 module "datadog_log_forwarder" {
   source = "../../"
 
-  env             = "example"
+  env = "example"
 
   stream_name_suffix = "example-suffix"
 
@@ -11,11 +11,11 @@ module "datadog_log_forwarder" {
 
   common_attributes_list = [
     {
-      name = "env"
+      name  = "env"
       value = "example-env"
     },
     {
-      name = "project"
+      name  = "project"
       value = "example-project"
     }
   ]

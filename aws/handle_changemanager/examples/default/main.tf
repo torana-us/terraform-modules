@@ -15,10 +15,10 @@ resource "aws_sns_topic" "this" {
 module "handle_cm" {
   source = "../../"
 
-  project_name = "example"
-  vpc_id       = aws_vpc.this.id
-  subnet_ids   = [aws_subnet.this.id]
-  parameter_name    = "dummy"
+  project_name   = "example"
+  vpc_id         = aws_vpc.this.id
+  subnet_ids     = [aws_subnet.this.id]
+  parameter_name = "dummy"
 
   depends_on = [
     aws_sns_topic.this

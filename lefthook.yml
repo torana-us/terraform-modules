@@ -1,0 +1,59 @@
+---
+pre-commit:
+  parallel: true
+  commands:
+    actionlint:
+      root: ".github/workflows/"
+      glob: "*.{yml,yaml}"
+      run: actionlint {staged_files}
+    typos:
+      run: |
+        if type -a typos >/dev/null 2>&1; then
+          typos --config .typos.toml
+        else
+          echo "typos is not found."
+        fi
+    tffmt:
+      root: "terraform/"
+      glob: "*.tf"
+      run: |
+        if type -a terraform >/dev/null 2>&1; then
+          terraform fmt -recursive
+        else
+          echo "terraform is not found."
+        fi
+    gitleaks:
+      run: gitleaks detect -v
+    tflint:
+      root: "terraform/"
+      glob: "*.tf"
+      run: |
+        config_path="$PWD/../.tflint.hcl"
+        if type -a tflint >/dev/null 2>&1; then
+          tflint -c ${config_path} --recursive --fix
+        else
+          echo "tflint is not found."
+        fi
+init:
+  parallel: true
+  commands:
+    terraform:
+      root: "terraform/"
+      run: |
+        if type -a terraform >/dev/null 2>&1; then
+          echo environments/aws/* modules/aws/service/* |
+          tr ' ' '\n' |
+          grep -v .tf |
+          xargs -I{} bash -c "cd {} && terraform init -upgrade"
+        else
+          echo "terraform is not found."
+        fi
+    tflint:
+      root: "terraform/"
+      run: |
+        config_path="$PWD/../.tflint.hcl"
+        if type -a tflint >/dev/null 2>&1; then
+          tflint -c ${config_path} --recursive --init
+        else
+          echo "tflint is not found."
+        fi
