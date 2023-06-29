@@ -1,7 +1,7 @@
 [files]
 extend-exclude = [
-    ".typos.toml",
-    ".terraform/**",
-    ".terraform.lock.hcl",
-    "*.tfstate*",
+  ".typos.toml",
+  ".terraform/**",
+  ".terraform.lock.hcl",
+  "*.tfstate*",
 ]
