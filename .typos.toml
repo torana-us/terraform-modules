@@ -4,4 +4,5 @@ extend-exclude = [
   ".terraform/**",
   ".terraform.lock.hcl",
   "*.tfstate*",
+  "go.sum",
 ]

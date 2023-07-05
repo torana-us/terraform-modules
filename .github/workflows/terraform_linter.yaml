@@ -23,5 +23,4 @@ jobs:
       tflint_config_path: ".tflint.hcl"
       command: "terraform"
     secrets:
-      tf_token: ${{ secrets.TF_CLOUD_API_TOKEN }}
       token: ${{ secrets.PAT }}
