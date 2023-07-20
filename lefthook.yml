@@ -41,9 +41,10 @@ init:
     terraform:
       run: |
         if type -a terraform >/dev/null 2>&1; then
-          echo aws/* datadog/* |
-          tr ' ' '\n' |
-          grep -v .tf |
+          find . -type d -name "examples" |
+          xargs -I{} find {} -type f -name "*.tf" |
+          xargs -I{} dirname {} |
+          uniq |
           xargs -I{} bash -c "cd {} && terraform init -upgrade -reconfigure"
         else
           echo "terraform is not found."
