@@ -62,13 +62,14 @@ resource "aws_vpc_security_group_ingress_rule" "ssm" {
 }
 
 resource "aws_vpc_security_group_ingress_rule" "self" {
-  security_group_id           = aws_security_group.ssm_vpc_endpoint.id
-  reference_security_group_id = aws_security_group.ssm_vpc_endpoint.id
-  ip_protocol                 = "-1"
+  security_group_id            = aws_security_group.ssm_vpc_endpoint.id
+  referenced_security_group_id = aws_security_group.ssm_vpc_endpoint.id
+  ip_protocol                  = "-1"
 }
 
 resource "aws_vpc_security_group_egress_rule" "all" {
   security_group_id = aws_security_group.ssm_vpc_endpoint.id
+  cidr_ipv4         = "0.0.0.0/0"
   ip_protocol       = "-1"
 }
 
