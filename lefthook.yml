@@ -14,7 +14,6 @@ pre-commit:
           echo "typos is not found."
         fi
     tffmt:
-      root: "terraform/"
       glob: "*.tf"
       run: |
         if type -a terraform >/dev/null 2>&1; then
@@ -25,10 +24,9 @@ pre-commit:
     gitleaks:
       run: gitleaks detect -v
     tflint:
-      root: "terraform/"
       glob: "*.tf"
       run: |
-        config_path="$PWD/../.tflint.hcl"
+        config_path="$PWD/.tflint.hcl"
         if type -a tflint >/dev/null 2>&1; then
           tflint -c ${config_path} --recursive --fix
         else
@@ -41,20 +39,18 @@ init:
   parallel: true
   commands:
     terraform:
-      root: "terraform/"
       run: |
         if type -a terraform >/dev/null 2>&1; then
-          echo environments/aws/* modules/aws/service/* |
+          echo aws/* datadog/* |
           tr ' ' '\n' |
           grep -v .tf |
-          xargs -I{} bash -c "cd {} && terraform init -upgrade"
+          xargs -I{} bash -c "cd {} && terraform init -upgrade -reconfigure"
         else
           echo "terraform is not found."
         fi
     tflint:
-      root: "terraform/"
       run: |
-        config_path="$PWD/../.tflint.hcl"
+        config_path="$PWD/.tflint.hcl"
         if type -a tflint >/dev/null 2>&1; then
           tflint -c ${config_path} --recursive --init
         else
