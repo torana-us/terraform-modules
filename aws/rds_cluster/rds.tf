@@ -22,6 +22,7 @@ resource "aws_rds_cluster" "this" {
   db_cluster_parameter_group_name  = var.db_cluster_parameter_group_name
   db_instance_parameter_group_name = var.db_instance_parameter_group_name
   enabled_cloudwatch_logs_exports  = var.enabled_cloudwatch_logs_exports
+  backup_retention_period          = var.backup_retention_period
 
   lifecycle {
     prevent_destroy = true

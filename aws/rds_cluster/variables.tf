@@ -73,3 +73,8 @@ variable "enabled_cloudwatch_logs_exports" {
   type    = set(string)
   default = []
 }
+
+variable "backup_retention_period" {
+  type = number
+  default = 1
+}
