@@ -48,11 +48,30 @@ module "lambda_role" {
   service_list = ["lambda.amazonaws.com"]
 }
 
+resource "aws_security_group" "ssm_vpc_endpoint" {
+  name = "ssm-vpc-endpoint"
+  vpc_id = var.vpc_id
+
+  ingress {
+    from_port = 443
+    to_port = 443
+    protocol = "tcp"
+    cidr_blocks = "0.0.0.0/0"
+  }
+
+  egress {
+    from_port   = 0
+    to_port     = 0
+    protocol    = "-1"
+    cidr_blocks = ["0.0.0.0/0"]
+  }
+}
+
 resource "aws_vpc_endpoint" "ssm" {
   vpc_endpoint_type   = "Interface"
   service_name        = "com.amazonaws.ap-northeast-1.ssm"
   vpc_id              = var.vpc_id
-  security_group_ids  = [data.aws_security_group.default.id]
+  security_group_ids  = [aws_security_group.ssm_vpc_endpoint.id]
   subnet_ids          = var.subnet_ids
   private_dns_enabled = true
 
