@@ -11,8 +11,8 @@ resource "aws_iam_role" "this" {
 
 data "aws_iam_policy_document" "base" {
   override_policy_documents = concat(
-    data.aws_iam_policy_document.service_assume_policy.*.json,
-    data.aws_iam_policy_document.aws_assume_policy.*.json,
+    data.aws_iam_policy_document.service_assume_policy[*].json,
+    data.aws_iam_policy_document.aws_assume_policy[*].json,
     var.custom_assume_policy_jsons
   )
 }

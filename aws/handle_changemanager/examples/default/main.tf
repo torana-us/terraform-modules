@@ -1,5 +1,7 @@
 resource "aws_vpc" "this" {
-  cidr_block = "10.22.0.0/18"
+  cidr_block           = "10.22.0.0/18"
+  enable_dns_hostnames = true
+  enable_dns_support   = true
 }
 
 resource "aws_subnet" "this" {
