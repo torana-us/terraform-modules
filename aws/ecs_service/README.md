@@ -31,7 +31,7 @@ No modules.
 | <a name="input_cluster_id"></a> [cluster\_id](#input\_cluster\_id) | n/a | `string` | n/a | yes |
 | <a name="input_container_definitions"></a> [container\_definitions](#input\_container\_definitions) | json | `string` | n/a | yes |
 | <a name="input_cpu"></a> [cpu](#input\_cpu) | n/a | `number` | n/a | yes |
-| <a name="input_deployment_controller"></a> [deployment\_controller](#input\_deployment\_controller) | n/a | `string` | CODE_DEPLOY | no |
+| <a name="input_deployment_controller"></a> [deployment\_controller](#input\_deployment\_controller) | n/a | `string` | `"CODE_DEPLOY"` | no |
 | <a name="input_desired_count"></a> [desired\_count](#input\_desired\_count) | n/a | `number` | n/a | yes |
 | <a name="input_execution_role_arn"></a> [execution\_role\_arn](#input\_execution\_role\_arn) | n/a | `string` | n/a | yes |
 | <a name="input_health_check_grace_period_seconds"></a> [health\_check\_grace\_period\_seconds](#input\_health\_check\_grace\_period\_seconds) | n/a | `number` | n/a | yes |
