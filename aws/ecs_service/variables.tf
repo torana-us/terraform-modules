@@ -47,7 +47,7 @@ variable "network_configuration" {
 }
 
 variable "deployment_controller" {
-  type = string
+  type    = string
   default = "CODE_DEPLOY"
 }
 
