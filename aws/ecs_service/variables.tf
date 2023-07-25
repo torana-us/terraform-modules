@@ -46,6 +46,11 @@ variable "network_configuration" {
   description = "(optional) describe your variable"
 }
 
+variable "deployment_controller" {
+  type    = string
+  default = "CODE_DEPLOY"
+}
+
 variable "capacity_provider_strategies" {
   type = list(object({
     capacity_provider = string
