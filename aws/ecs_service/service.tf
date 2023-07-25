@@ -38,7 +38,7 @@ resource "aws_ecs_service" "this" {
   }
 
   deployment_controller {
-    type = "CODE_DEPLOY"
+    type = var.deployment_controller
   }
 
   dynamic "service_registries" {
