@@ -55,7 +55,8 @@ resource "aws_kinesis_firehose_delivery_stream" "datadog_logs_forwarder" {
 
   lifecycle {
     ignore_changes = [
-      http_endpoint_configuration[0].access_key
+      http_endpoint_configuration[0].access_key,
+      http_endpoint_configuration[0].request_configuration.*.common_attributes
     ]
   }
 }
