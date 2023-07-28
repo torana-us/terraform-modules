@@ -1,3 +1,11 @@
+# logs_forwarder
+
+## Caution!
+
+Kinesis Firehoseに設定するaccess_keyには、Datadog API KeyをAWSコンソールから設定する必要があります。
+再apply時はDummy文字列で上書きされてしまうため、再設定してください。
+Datadog API Keyは1passwordに保存してあります。
+
 <!-- BEGIN_TF_DOCS -->
 ## Requirements
 
