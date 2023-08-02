@@ -3,6 +3,9 @@ resource "aws_subnet" "this" {
   vpc_id            = var.vpc_id
   availability_zone = var.az
 
+  ipv6_cidr_block                 = var.ipv6_cidr_block
+  assign_ipv6_address_on_creation = var.ipv6_cidr_block != null
+
   tags = {
     Name = var.name
   }
