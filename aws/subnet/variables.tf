@@ -22,3 +22,8 @@ variable "gateway_route" {
 variable "name" {
   type = string
 }
+
+variable "ipv6_cidr_block" {
+  type    = string
+  default = null
+}
