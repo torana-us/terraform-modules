@@ -33,7 +33,7 @@ locals {
 
 resource "aws_vpc" "vpc" {
   cidr_block                       = local.cidr_block
-  assign_generated_ipv6_cidr_block = true
+  assign_generated_ipv6_cidr_block = false
 }
 
 resource "aws_internet_gateway" "gateway" {
