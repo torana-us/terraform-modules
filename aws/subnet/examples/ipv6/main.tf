@@ -1,5 +1,5 @@
 module "subnet" {
-  source = "../"
+  source = "../../"
 
   for_each = local.subnets
 
