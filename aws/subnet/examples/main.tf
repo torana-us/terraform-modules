@@ -7,7 +7,7 @@ module "subnet" {
   az              = each.value.az
   cidr_block      = each.value.cidr_block
   ipv6_cidr_block = each.value.ipv6_cidr_block
-  gateway_route   = {
+  gateway_route = {
     destination_cidr_block = "0.0.0.0/0"
     gateway_id             = aws_internet_gateway.gateway.id
   }
@@ -16,7 +16,7 @@ module "subnet" {
 
 locals {
   cidr_block = "192.168.0.0/16"
-  subnets    = {
+  subnets = {
     subnet-1a_1 = {
       az              = "ap-northeast-1a"
       cidr_block      = cidrsubnet(local.cidr_block, 8, 1)
