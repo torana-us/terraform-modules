@@ -1,13 +1,18 @@
+locals {
+  ipv6_only = var.cidr_block == null
+  ipv6_enable = var.ipv6_cidr_block != null
+}
+
 resource "aws_subnet" "this" {
   cidr_block        = var.cidr_block
   vpc_id            = var.vpc_id
   availability_zone = var.az
 
-  ipv6_native                                    = var.cidr_block == null
   ipv6_cidr_block                                = var.ipv6_cidr_block
-  enable_dns64                                   = var.ipv6_cidr_block != null
-  assign_ipv6_address_on_creation                = var.ipv6_cidr_block != null
-  enable_resource_name_dns_aaaa_record_on_launch = var.ipv6_cidr_block != null
+  ipv6_native                                    = local.ipv6_only
+  enable_dns64                                   = local.ipv6_enable
+  assign_ipv6_address_on_creation                = local.ipv6_enable
+  enable_resource_name_dns_aaaa_record_on_launch = local.ipv6_enable
 
   tags = {
     Name = var.name
