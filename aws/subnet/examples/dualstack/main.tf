@@ -11,6 +11,10 @@ module "subnet" {
     destination_cidr_block = "0.0.0.0/0"
     gateway_id             = aws_internet_gateway.gateway.id
   }
+  gateway_route_ipv6 = {
+    destination_cidr_block = "::/0"
+    gateway_id             = aws_internet_gateway.gateway.id
+  }
   name = each.key
 }
 

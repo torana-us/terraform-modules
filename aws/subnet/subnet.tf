@@ -31,3 +31,11 @@ resource "aws_route" "gateway" {
   destination_cidr_block = var.gateway_route.destination_cidr_block
   gateway_id             = var.gateway_route.gateway_id
 }
+
+resource "aws_route" "gateway_ipv6" {
+  count = var.gateway_route_ipv6 == null ? 0 : 1
+
+  route_table_id         = aws_route_table.this.id
+  destination_cidr_block = var.gateway_route_ipv6.destination_cidr_block
+  gateway_id             = var.gateway_route_ipv6.gateway_id
+}
