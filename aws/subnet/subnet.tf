@@ -5,8 +5,9 @@ resource "aws_subnet" "this" {
 
   ipv6_native                                    = var.cidr_block == null
   ipv6_cidr_block                                = var.ipv6_cidr_block
+  enable_dns64                                   = var.ipv6_cidr_block != null
   assign_ipv6_address_on_creation                = var.ipv6_cidr_block != null
-  enable_resource_name_dns_aaaa_record_on_launch = var.cidr_block == null
+  enable_resource_name_dns_aaaa_record_on_launch = var.ipv6_cidr_block != null
 
   tags = {
     Name = var.name
