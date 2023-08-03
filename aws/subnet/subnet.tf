@@ -1,5 +1,5 @@
 locals {
-  ipv6_only = var.cidr_block == null
+  ipv6_only   = var.cidr_block == null
   ipv6_enable = var.ipv6_cidr_block != null
 }
 
