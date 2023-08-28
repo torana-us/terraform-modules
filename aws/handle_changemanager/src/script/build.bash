@@ -1,7 +1,7 @@
 #!/bin/bash
 
 current="$(cd "$(dirname "$0")" && pwd)"
-binary_name="runner"
+binary_name="bootstrap"
 
 cd "$current/.." || exit 1
 GOOS=linux go build -o "$binary_name" .
