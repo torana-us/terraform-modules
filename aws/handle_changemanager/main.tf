@@ -10,10 +10,10 @@ data "aws_security_group" "default" {
 resource "aws_lambda_function" "this" {
   function_name    = local.lambda_name
   role             = module.lambda_role.role.arn
-  filename         = "${path.module}/src/runner.zip"
-  handler          = "runner"
-  runtime          = "go1.x"
-  source_code_hash = filebase64sha256("${path.module}/src/runner.zip")
+  filename         = "${path.module}/src/bootstrap.zip"
+  handler          = "bootstrap"
+  runtime          = "provided.al2"
+  source_code_hash = filebase64sha256("${path.module}/src/bootstrap.zip")
 
   vpc_config {
     subnet_ids         = var.subnet_ids
