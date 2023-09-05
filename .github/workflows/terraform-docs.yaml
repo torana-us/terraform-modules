@@ -10,7 +10,7 @@ jobs:
     outputs:
       target_dirs: ${{ steps.uniq_dirs.outputs.d }}
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
         with:
           fetch-depth: 0
       
@@ -36,7 +36,7 @@ jobs:
       matrix:
         target_dir: ${{ fromJson(needs.dirs.outputs.target_dirs) }}
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
       
       - uses: aquaproj/aqua-installer@v2.1.2
         with:
