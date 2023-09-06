@@ -52,6 +52,11 @@ resource "aws_ecs_service" "this" {
     }
   }
 
+  deployment_circuit_breaker {
+    enable   = var.deployment_circuit_breaker.enable
+    rollback = var.deployment_circuit_breaker.rollback
+  }
+
   tags = merge({
     "Name" = var.service_name
   }, var.tags)
