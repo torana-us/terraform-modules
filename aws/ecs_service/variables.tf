@@ -51,6 +51,18 @@ variable "deployment_controller" {
   default = "CODE_DEPLOY"
 }
 
+variable "deployment_circuit_breaker" {
+  type = object({
+    enable   = bool
+    rollback = bool
+  })
+
+  default = {
+    enable   = false
+    rollback = false
+  }
+}
+
 variable "capacity_provider_strategies" {
   type = list(object({
     capacity_provider = string
