@@ -1,0 +1,44 @@
+---
+# See https://aquasecurity.github.io/trivy/v0.33/docs/references/customization/config-file/
+
+# Same as '--quiet'
+# Default is false
+quiet: true
+
+# Same as '--debug'
+# Default is false
+debug: false
+
+# Same as '--timeout'
+# Default is '5m'
+timeout: 10m
+
+# Same as '--cache-dir'
+# Default is your system cache dir
+cache-dir: $HOME/.cache/trivy
+
+# Same as '--format'
+# Default is 'table'
+format: table
+
+# Same as '--exit-code'
+# Default is 0
+exit-code: 1
+
+# Same as '--severity'
+# Default is all severities
+severity:
+  - HIGH
+  - CRITICAL
+
+scan:
+  # Same as '--skip-dirs'
+  # Default is empty
+  skip-dirs:
+    - "**/.terraform/"
+    - "**/examples/"
+
+  # Same as '--security-checks'
+  # Default depends on subcommand
+  security-checks:
+    - config
