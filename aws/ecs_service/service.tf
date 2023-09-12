@@ -52,9 +52,12 @@ resource "aws_ecs_service" "this" {
     }
   }
 
-  deployment_circuit_breaker {
-    enable   = var.deployment_circuit_breaker.enable
-    rollback = var.deployment_circuit_breaker.rollback
+  dynamic "deployment_circuit_breaker" {
+    for_each = var.deployment_circuit_breaker.enable ? [1] : []
+    content {
+      enable   = var.deployment_circuit_breaker.enable
+      rollback = var.deployment_circuit_breaker.rollback
+    }
   }
 
   tags = merge({
