@@ -37,6 +37,8 @@ scan:
   skip-dirs:
     - "**/.terraform/"
     - "**/examples/"
+    - ".git/"
+    - ".github/"
 
   # Same as '--security-checks'
   # Default depends on subcommand

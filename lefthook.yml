@@ -36,11 +36,10 @@ pre-commit:
       glob: "*.tf"
       run: |
         config_path="$PWD/.trivy.yml"
-        ignore_path="$PWD/.trivyignore"
         if type -a trivy >/dev/null 2>&1; then
-          trivy config --config ${config_path} --ignorefile ${ignore_path} {staged_files}
+          trivy config --config ${config_path} .
         else
-          echo "tflint is not found."
+          echo "trivy is not found."
         fi
     taplo:
       glob: "*.toml"
