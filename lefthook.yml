@@ -38,7 +38,7 @@ pre-commit:
         config_path="$PWD/.trivy.yml"
         ignore_path="$PWD/.trivyignore"
         if type -a trivy >/dev/null 2>&1; then
-          trivy config --config ${config_path} --ignore ${ignore_path} {staged_files}
+          trivy config --config ${config_path} --ignorefile ${ignore_path} {staged_files}
         else
           echo "tflint is not found."
         fi
