@@ -6,7 +6,7 @@ require (
 	github.com/aws/aws-lambda-go v1.41.0
 	github.com/aws/aws-sdk-go v1.45.15
 	github.com/aws/aws-sdk-go-v2/config v1.18.42
-	github.com/aws/aws-sdk-go-v2/service/ssm v1.37.5
+	github.com/aws/aws-sdk-go-v2/service/ssm v1.38.0
 	github.com/go-sql-driver/mysql v1.7.1
 	go.uber.org/zap v1.26.0
 )
