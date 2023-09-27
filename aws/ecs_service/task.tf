@@ -24,8 +24,6 @@ resource "aws_ecs_task_definition" "this" {
   }, var.tags)
 
   lifecycle {
-    ignore_changes = [
-      container_definitions
-    ]
+    ignore_changes = all
   }
 }
