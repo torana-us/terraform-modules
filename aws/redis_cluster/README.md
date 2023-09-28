@@ -39,6 +39,8 @@ No modules.
 | <a name="input_replicas_per_node_group"></a> [replicas\_per\_node\_group](#input\_replicas\_per\_node\_group) | node's number per shard | `number` | n/a | yes |
 | <a name="input_replication_group_id"></a> [replication\_group\_id](#input\_replication\_group\_id) | cluster name | `string` | n/a | yes |
 | <a name="input_security_group_ids"></a> [security\_group\_ids](#input\_security\_group\_ids) | n/a | `set(string)` | n/a | yes |
+| <a name="input_snapshot_retention_limit"></a> [snapshot\_retention\_limit](#input\_snapshot\_retention\_limit) | n/a | `number` | `1` | no |
+| <a name="input_snapshot_window"></a> [snapshot\_window](#input\_snapshot\_window) | n/a | `string` | n/a | yes |
 | <a name="input_subnet_ids"></a> [subnet\_ids](#input\_subnet\_ids) | n/a | `set(string)` | n/a | yes |
 
 ## Outputs
