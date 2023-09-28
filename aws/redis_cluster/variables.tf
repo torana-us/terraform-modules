@@ -63,7 +63,7 @@ variable "subnet_ids" {
 }
 
 variable "snapshot_retention_limit" {
-  type = number
+  type    = number
   default = 1
 }
 
