@@ -61,3 +61,12 @@ variable "automatic_failover_enabled" {
 variable "subnet_ids" {
   type = set(string)
 }
+
+variable "snapshot_retention_limit" {
+  type    = number
+  default = 1
+}
+
+variable "snapshot_window" {
+  type = string
+}

@@ -16,6 +16,8 @@ resource "aws_elasticache_replication_group" "this" {
   replicas_per_node_group    = var.replicas_per_node_group
   parameter_group_name       = var.parameter_group_name
   security_group_ids         = var.security_group_ids
+  snapshot_retention_limit   = var.snapshot_retention_limit
+  snapshot_window            = var.snapshot_window
   subnet_group_name          = aws_elasticache_subnet_group.this.name
   maintenance_window         = var.maintenance_window
   auto_minor_version_upgrade = var.auto_minor_version_upgrade
