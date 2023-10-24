@@ -149,7 +149,10 @@ func HandleRequest(ctx context.Context, event events.SNSEvent) error {
 
 	var message SNSEventMessage
 	l.Debug("start getMessage")
-	getMessage(event, &message)
+	err := getMessage(event, &message)
+	if err != nil {
+		return err
+	}
 	l.Debug(fmt.Sprintf("user: %s, action: %s", message.User, message.Action))
 
 	l.Debug("get dsn")
@@ -225,16 +228,9 @@ func createUser(db *sql.DB, userName string, dbName string) (string, error) {
 
 	l.Debug(fmt.Sprintf("name %s", userName))
 
-	exist, err := existUser(db, userName)
-
-	l.Debug(fmt.Sprintf("exist %t", exist))
-
+	err := deleteUser(db, userName)
 	if err != nil {
 		return "", err
-	}
-
-	if exist {
-		return "", nil
 	}
 
 	l.Debug("create user")
