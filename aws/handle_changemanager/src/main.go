@@ -225,16 +225,9 @@ func createUser(db *sql.DB, userName string, dbName string) (string, error) {
 
 	l.Debug(fmt.Sprintf("name %s", userName))
 
-	exist, err := existUser(db, userName)
-
-	l.Debug(fmt.Sprintf("exist %t", exist))
-
+	err = deleteUser(db, userName)
 	if err != nil {
-		return "", err
-	}
-
-	if exist {
-		return "", nil
+		return err
 	}
 
 	l.Debug("create user")
