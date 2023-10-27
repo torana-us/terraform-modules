@@ -6,6 +6,10 @@ pre-commit:
       root: ".github/workflows/"
       glob: "*.{yml,yaml}"
       run: actionlint {staged_files}
+    ghalint:
+      root: ".github/workflows/"
+      glob: "*.{yml,yaml}"
+      run: ghalint run
     typos:
       run: |
         if type -a typos >/dev/null 2>&1; then
