@@ -9,25 +9,29 @@ jobs:
     runs-on: ubuntu-latest
     outputs:
       target_dirs: ${{ steps.uniq_dirs.outputs.d }}
+    permissions:
+      contents: read
     steps:
       - uses: actions/checkout@v4
         with:
           fetch-depth: 0
-      
+
       - uses: technote-space/get-diff-action@v6
         with:
           PATTERNS: |
             aws/**
             datadog/**
-          
+
       - name: uniq dirs
         id: uniq_dirs
         run: |
           d=$(echo ${{ env.GIT_DIFF }} | xargs dirname | sort | uniq | jq -cnR '[inputs | select(length > 0)]')
           echo "d=$d" >> "$GITHUB_OUTPUT"
-          
+
   docs:
     runs-on: ubuntu-latest
+    permissions:
+      contents: read
     timeout-minutes: 10
     if: needs.dirs.outputs.target_dirs != '[]' && needs.dirs.outputs.target_dirs != ''
     needs: [dirs]
@@ -37,15 +41,15 @@ jobs:
         target_dir: ${{ fromJson(needs.dirs.outputs.target_dirs) }}
     steps:
       - uses: actions/checkout@v4
-      
+
       - uses: aquaproj/aqua-installer@v2.1.2
         with:
           aqua_version: v2.16.0
-      
+
       - name: Render terraform docs and push changes back to PR
         run: terraform-docs markdown ${{ matrix.target_dir }} --output-file README.md
-      
+
       - run: |
-          if [ $(git status -s) != "" ]; then
+          if [ "$(git status -s)" != "" ]; then
             exit 1
           fi
