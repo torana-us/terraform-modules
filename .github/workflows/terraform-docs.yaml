@@ -44,7 +44,7 @@ jobs:
 
       - uses: aquaproj/aqua-installer@v2.1.2
         with:
-          aqua_version: v2.16.0
+          aqua_version: v2.16.2
 
       - name: Render terraform docs and push changes back to PR
         run: terraform-docs markdown ${{ matrix.target_dir }} --output-file README.md
