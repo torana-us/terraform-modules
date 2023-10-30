@@ -6,6 +6,7 @@ rules:
   commas: enable
   comments:
     level: warning
+    min-spaces-from-content: 1
   comments-indentation:
     level: warning
   document-end: disable
@@ -28,3 +29,4 @@ rules:
     check-keys: false
 ignore: |
   node_modules/**
+  .terraform
