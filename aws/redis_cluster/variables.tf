@@ -70,3 +70,8 @@ variable "snapshot_retention_limit" {
 variable "snapshot_window" {
   type = string
 }
+
+variable "transit_encryption_enabled" {
+  type = bool
+  default = false
+}

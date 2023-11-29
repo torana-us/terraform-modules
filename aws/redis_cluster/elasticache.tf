@@ -22,6 +22,7 @@ resource "aws_elasticache_replication_group" "this" {
   maintenance_window         = var.maintenance_window
   auto_minor_version_upgrade = var.auto_minor_version_upgrade
   automatic_failover_enabled = local.automatic_failover_enabled
+  transit_encryption_enabled = var.transit_encryption_enabled
 }
 
 resource "aws_elasticache_subnet_group" "this" {
