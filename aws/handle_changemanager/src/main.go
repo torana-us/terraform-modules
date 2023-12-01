@@ -106,6 +106,10 @@ func (f GetDsnFunc) Get() (string, error) {
 	return f()
 }
 
+func Bool(v bool) *bool {
+	return &v
+}
+
 func MakeDsnGetter() DsnGetter {
 	var f GetDsnFunc
 
@@ -119,7 +123,7 @@ func MakeDsnGetter() DsnGetter {
 		f = func() (string, error) {
 			input := &ssm.GetParameterInput{
 				Name:           &parameterName,
-				WithDecryption: func(b bool) *bool { return &b }(true),
+				WithDecryption: Bool(true),
 			}
 
 			output, err := ssmService.GetParameter(context.TODO(), input)
@@ -297,7 +301,7 @@ func putDbInfo(userName string, password string, dbName string) error {
 		Name:      &parameterName,
 		Value:     &parameterValue,
 		Type:      types.ParameterTypeSecureString,
-		Overwrite: func(b bool) *bool { return &b }(true),
+		Overwrite: Bool(true),
 	}
 
 	_, err = client.PutParameter(context.TODO(), input)
