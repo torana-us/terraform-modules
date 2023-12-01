@@ -16,7 +16,6 @@ import (
 	"github.com/aws/aws-sdk-go-v2/config"
 	"github.com/aws/aws-sdk-go-v2/service/ssm"
 	"github.com/aws/aws-sdk-go-v2/service/ssm/types"
-	"github.com/aws/aws-sdk-go/aws"
 	_ "github.com/go-sql-driver/mysql"
 	"go.uber.org/zap"
 )
@@ -119,8 +118,8 @@ func MakeDsnGetter() DsnGetter {
 		parameterName := os.Getenv("parameter_name")
 		f = func() (string, error) {
 			input := &ssm.GetParameterInput{
-				Name:           aws.String(parameterName),
-				WithDecryption: aws.Bool(true),
+				Name:           &parameterName,
+				WithDecryption: func(b bool) *bool { return &b }(true),
 			}
 
 			output, err := ssmService.GetParameter(context.TODO(), input)
@@ -295,10 +294,10 @@ func putDbInfo(userName string, password string, dbName string) error {
 	parameterValue := password
 
 	input := &ssm.PutParameterInput{
-		Name:      aws.String(parameterName),
-		Value:     aws.String(parameterValue),
+		Name:      &parameterName,
+		Value:     &parameterValue,
 		Type:      types.ParameterTypeSecureString,
-		Overwrite: aws.Bool(true),
+		Overwrite: func(b bool) *bool { return &b }(true),
 	}
 
 	_, err = client.PutParameter(context.TODO(), input)
