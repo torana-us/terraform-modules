@@ -1,7 +1,5 @@
-data "aws_caller_identity" "self" {}
-
 resource "datadog_integration_aws" "this" {
-  account_id = data.aws_caller_identity.self.account_id
+  account_id = var.aws_account_id
   role_name  = var.role_name
 
   excluded_regions = [
