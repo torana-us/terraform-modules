@@ -26,6 +26,16 @@ resource "aws_lambda_function" "this" {
       parameter_name = var.parameter_name
     }
   }
+
+  depends_on = [
+    aws_cloudwatch_log_group.this,
+  ]
+}
+
+resource "aws_cloudwatch_log_group" "this" {
+  name              = "/aws/lambda/${local.lambda_name}"
+  retention_in_days = 7
+  log_group_class   = "INFREQUENT_ACCESS"
 }
 
 resource "aws_lambda_permission" "sns" {
