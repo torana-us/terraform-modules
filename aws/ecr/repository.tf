@@ -22,3 +22,24 @@ resource "aws_ecr_repository_policy" "this" {
   policy     = var.policy
   repository = aws_ecr_repository.this.name
 }
+
+resource "aws_ecr_lifecycle_policy" "this" {
+  repository = aws_ecr_repository.this.name
+  policy = jsonencode({
+    rules = [
+      {
+        rulePriority = 1
+        description  = "keep last 15 images"
+        selection = {
+          tagStatus   = "any"
+          countType   = "imageCountMoreThan"
+          countNumber = 15
+        }
+        action = {
+          type = "expire"
+        }
+      }
+    ]
+  })
+}
+
