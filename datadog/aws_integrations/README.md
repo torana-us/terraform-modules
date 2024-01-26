@@ -34,5 +34,7 @@ No modules.
 
 ## Outputs
 
-No outputs.
+| Name | Description |
+|------|-------------|
+| <a name="output_external_id"></a> [external\_id](#output\_external\_id) | n/a |
 <!-- END_TF_DOCS -->
