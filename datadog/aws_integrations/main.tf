@@ -14,6 +14,7 @@ resource "datadog_integration_aws" "this" {
     "ap-southeast-3",
     "ap-southeast-4",
     "ca-central-1",
+    "ca-west-1",
     "eu-central-1",
     "eu-central-2",
     "eu-north-1",
@@ -74,6 +75,7 @@ resource "datadog_integration_aws" "this" {
     "firehose"                       = false
     "fsx"                            = false
     "gamelift"                       = false
+    "globalaccelerator"              = false
     "glue"                           = false
     "inspector"                      = false
     "iot"                            = false
@@ -89,6 +91,7 @@ resource "datadog_integration_aws" "this" {
     "mediapackage"                   = false
     "mediastore"                     = false
     "mediatailor"                    = false
+    "memorydb"                       = false
     "ml"                             = false
     "mq"                             = false
     "msk"                            = false
@@ -97,6 +100,7 @@ resource "datadog_integration_aws" "this" {
     "neptune"                        = false
     "network_elb"                    = false
     "networkfirewall"                = false
+    "networkmonitor"                 = false
     "opsworks"                       = false
     "polly"                          = false
     "privatelinkendpoints"           = false
