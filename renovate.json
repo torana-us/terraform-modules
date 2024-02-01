@@ -1,6 +1,32 @@
 {
-    "$schema": "https://docs.renovatebot.com/renovate-schema.json",
-    "extends": [
-        "local>torana-us/sre"
-    ]
+  "$schema": "https://docs.renovatebot.com/renovate-schema.json",
+  "extends": [
+    "config:base",
+    "github>aquaproj/aqua-renovate-config#1.13.0"
+  ],
+  "regexManagers": [
+    {
+      "fileMatch": [
+        "^\\.tflint\\.hcl$"
+      ],
+      "matchStrings": [
+        "version\\s*=\\s*\"(?<currentValue>[^\"]*)([^}])*?source\\s*=\\s*\"github.com/(?<depName>.*)\"",
+        "source\\s*=\\s*\"github.com/(?<depName>.*)\"([^}])*?version\\s*=\\s*\"(?<currentValue>[^\"]*)"
+      ],
+      "datasourceTemplate": "github-releases",
+      "extractVersionTemplate": "^v(?<version>.*)$"
+    },
+    {
+      "fileMatch": [
+        "\\.hcl$"
+      ],
+      "matchStrings": [
+        "(?<vendor>.*?)[^=]*=[^\\{]*\\{([\\s\\n]*(?:(?<source>source)[^=]*=[^\"]*?\"(?<owner>[^/]*)/(?<name>[^\"]*)\"|(?<version>version)[^=]*=[^\"]*\"(?<currentValue>[^\"]*?)\"))+[^\\}]*\\}"
+      ],
+      "datasourceTemplate": "github-releases",
+      "depNameTemplate": "{{owner}}/terraform-provider-{{name}}",
+      "depTypeTemplate": "required_provider",
+      "extractVersionTemplate": "^v(?<version>.*)$"
+    }
+  ]
 }
