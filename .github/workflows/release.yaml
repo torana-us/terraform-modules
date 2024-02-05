@@ -27,7 +27,8 @@ jobs:
         run: |
           git tag ${{ steps.gen_tag.outputs.tag }}
           git push origin ${{ steps.gen_tag.outputs.tag }}
-      - uses: release-drafter/release-drafter@09c613e259eb8d4e7c81c2cb00618eb5fc4575a7 # v5
+      
+      - uses: release-drafter/release-drafter@3f0f87098bd6b5c5b9a36d49c41d998ea58f9348 # v6
         with:
           publish: true
           tag: ${{ steps.gen_tag.outputs.tag }}
