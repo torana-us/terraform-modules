@@ -17,14 +17,12 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@b4ffde65f46336ab88eb53be808477a3936bae11 # v4
-      
       - name: generate tag
         id: gen_tag
         run: |
           tag=$(TZ=Asia/Tokyo date +%Y%m%d%H%M%S)
           echo "tag: $tag"
           echo "tag=$tag" >> "$GITHUB_OUTPUT"
-      
       - name: push tag
         run: |
           git tag ${{ steps.gen_tag.outputs.tag }}
