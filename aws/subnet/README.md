@@ -21,6 +21,7 @@ No modules.
 | Name | Type |
 |------|------|
 | [aws_route.gateway](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/route) | resource |
+| [aws_route.gateway_ipv6](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/route) | resource |
 | [aws_route_table.this](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/route_table) | resource |
 | [aws_route_table_association.this](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/route_table_association) | resource |
 | [aws_subnet.this](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/subnet) | resource |
@@ -30,8 +31,10 @@ No modules.
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:--------:|
 | <a name="input_az"></a> [az](#input\_az) | n/a | `string` | n/a | yes |
-| <a name="input_cidr_block"></a> [cidr\_block](#input\_cidr\_block) | n/a | `string` | n/a | yes |
+| <a name="input_cidr_block"></a> [cidr\_block](#input\_cidr\_block) | n/a | `string` | `null` | no |
 | <a name="input_gateway_route"></a> [gateway\_route](#input\_gateway\_route) | specify igw or vpg | <pre>object({<br>    destination_cidr_block = string<br>    gateway_id             = string<br>  })</pre> | `null` | no |
+| <a name="input_gateway_route_ipv6"></a> [gateway\_route\_ipv6](#input\_gateway\_route\_ipv6) | specify igw or vpg | <pre>object({<br>    destination_cidr_block = string<br>    gateway_id             = string<br>  })</pre> | `null` | no |
+| <a name="input_ipv6_cidr_block"></a> [ipv6\_cidr\_block](#input\_ipv6\_cidr\_block) | n/a | `string` | `null` | no |
 | <a name="input_name"></a> [name](#input\_name) | n/a | `string` | n/a | yes |
 | <a name="input_vpc_id"></a> [vpc\_id](#input\_vpc\_id) | n/a | `string` | n/a | yes |
 
