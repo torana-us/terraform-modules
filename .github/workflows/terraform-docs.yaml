@@ -3,9 +3,9 @@ name: terraform-docs
 
 on:
   pull_request:
+    paths:
+      - '**.tf'
 
-env:
-  HEAD_REF: ${{ github.head_ref }}
 
 jobs:
   dirs:
@@ -19,6 +19,7 @@ jobs:
       - name: uniq dirs
         id: uniq_dirs
         run: |
+          set -xv
           d=$(git diff --diff-filter=AMRCD \
                 --name-only \
                 "HEAD..origin/master" \
