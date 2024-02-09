@@ -4,32 +4,34 @@ name: terraform-docs
 on:
   pull_request:
 
+env:
+  HEAD_REF: ${{ github.head_ref }}
+
 jobs:
   dirs:
     runs-on: ubuntu-latest
-    outputs:
-      target_dirs: ${{ steps.uniq_dirs.outputs.d }}
     permissions:
       contents: read
     steps:
       - uses: actions/checkout@b4ffde65f46336ab88eb53be808477a3936bae11 # v4
         with:
           fetch-depth: 0
-      - uses: technote-space/get-diff-action@f27caffdd0fb9b13f4fc191c016bb4e0632844af # v6
-        with:
-          PATTERNS: |
-            aws/**
-            datadog/**
       - name: uniq dirs
         id: uniq_dirs
         run: |
-          d=$(echo ${{ env.GIT_DIFF }} \
-              | xargs dirname \
-              | sort \
-              | uniq \
-              | grep -v examples \
-              | jq -cnR '[inputs | select(length > 0)]')
+          d=$(git diff --diff-filter=AMRCD \
+                --name-only \
+                "${{ env.HEAD_REF }}..origin/main" \
+                "**.tf" \
+                | xargs dirname \
+                | sort -u \
+                | grep -v examples \
+                | jq -cnR '[inputs | select(length > 0)]' \
+                || true
+              )
           echo "d=$d" >> "$GITHUB_OUTPUT"
+    outputs:
+      target_dirs: ${{ steps.uniq_dirs.outputs.d }}
 
   docs:
     runs-on: ubuntu-latest
@@ -47,7 +49,6 @@ jobs:
       - uses: aquaproj/aqua-installer@7c7338067bdb97d5bea2acc82b5870afca470d18 # v2.3.0
         with:
           aqua_version: v2.23.1
-
       - name: Render terraform docs and push changes back to PR
         run: terraform-docs markdown ${{ matrix.target_dir }} --output-file README.md
       - run: |
