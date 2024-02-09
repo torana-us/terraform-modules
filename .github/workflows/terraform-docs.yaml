@@ -22,7 +22,7 @@ jobs:
           d=$(git diff --diff-filter=AMRCD \
                 --name-only \
                 "${{ env.HEAD_REF }}..origin/main" \
-                "**.tf" \
+                -- "**.tf" \
                 | xargs dirname \
                 | sort -u \
                 | grep -v examples \
