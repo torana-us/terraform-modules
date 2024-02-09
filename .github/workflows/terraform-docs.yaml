@@ -21,7 +21,7 @@ jobs:
         run: |
           d=$(git diff --diff-filter=AMRCD \
                 --name-only \
-                "${{ env.HEAD_REF }}..origin/main" \
+                "HEAD..origin/master" \
                 -- "**.tf" \
                 | xargs dirname \
                 | sort -u \
