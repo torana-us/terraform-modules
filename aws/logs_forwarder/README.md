@@ -11,7 +11,7 @@ Datadog API Keyは1passwordに保存してあります。
 
 | Name | Version |
 |------|---------|
-| <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | >= 1.1.0 |
+| <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | >= 1.5.0 |
 | <a name="requirement_aws"></a> [aws](#requirement\_aws) | >= 5.0.0 |
 
 ## Providers
@@ -48,7 +48,7 @@ Datadog API Keyは1passwordに保存してあります。
 
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:--------:|
-| <a name="input_common_attributes_list"></a> [common\_attributes\_list](#input\_common\_attributes\_list) | n/a | <pre>set(object({<br>      name = string<br>      value = string<br>    }))</pre> | `[]` | no |
+| <a name="input_common_attributes_list"></a> [common\_attributes\_list](#input\_common\_attributes\_list) | n/a | <pre>set(object({<br>    name  = string<br>    value = string<br>  }))</pre> | `[]` | no |
 | <a name="input_env"></a> [env](#input\_env) | n/a | `string` | n/a | yes |
 | <a name="input_log_group_name_list"></a> [log\_group\_name\_list](#input\_log\_group\_name\_list) | n/a | `set(string)` | n/a | yes |
 | <a name="input_stream_name_suffix"></a> [stream\_name\_suffix](#input\_stream\_name\_suffix) | n/a | `string` | n/a | yes |
