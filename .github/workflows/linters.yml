@@ -43,7 +43,7 @@ jobs:
   markdownlint:
     needs: path-filter
     if: needs.path-filter.outputs.markdownlint == 'true'
-    uses: ./wc-markdownlint.yml@master
+    uses: ./.github/workflows/wc-markdownlint.yml
     permissions:
       id-token: write
       contents: read
@@ -52,7 +52,7 @@ jobs:
   shellchecker:
     needs: path-filter
     if: needs.path-filter.outputs.shellchecker == 'true'
-    uses: .//wc-shellchecker.yml@master
+    uses: ./.github/workflows/wc-shellchecker.yml
     permissions:
       id-token: write
       contents: read
@@ -61,7 +61,7 @@ jobs:
   ghalint:
     needs: path-filter
     if: needs.path-filter.outputs.ghalint == 'true'
-    uses: ./wc-ghalint.yml@master
+    uses: ./.github/workflows/wc-ghalint.yml
     permissions:
       id-token: write
       contents: read
@@ -70,7 +70,7 @@ jobs:
   yamllint:
     needs: path-filter
     if: needs.path-filter.outputs.yamllint == 'true'
-    uses: ./wc-yamllint.yml@master
+    uses: ./.github/workflows/wc-yamllint.yml
     permissions:
       id-token: write
       contents: read
@@ -79,21 +79,21 @@ jobs:
   taplo:
     needs: path-filter
     if: needs.path-filter.outputs.taplo == 'true'
-    uses: ./wc-taplo.yml@master
+    uses: ./.github/workflows/wc-taplo.yml
     permissions:
       id-token: write
       contents: read
       pull-requests: write
 
   gitleaks:
-    uses: ./wc-gitleaks.yml@master
+    uses: ./.github/workflows/wc-gitleaks.yml
     permissions:
       id-token: write
       contents: read
       pull-requests: write
 
   typos:
-    uses: ./wc-typos.yml@master
+    uses: ./.github/workflows/wc-typos.yml
     permissions:
       id-token: write
       contents: read
