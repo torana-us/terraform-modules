@@ -113,4 +113,3 @@ jobs:
       tflint_config_path: ".tflint.hcl"
     secrets:
       token: ${{ secrets.PAT }}
-
