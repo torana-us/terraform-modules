@@ -12,6 +12,8 @@ resource "aws_ecs_task_definition" "this" {
     "FARGATE"
   ]
 
+  track_latest = true
+
   # volume {
   # }
 
