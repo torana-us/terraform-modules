@@ -16,6 +16,11 @@ jobs:
       - name: Checkout
         timeout-minutes: 3
         uses: actions/checkout@b4ffde65f46336ab88eb53be808477a3936bae11 # v4.1.1
+      - name: Setup aqua
+        timeout-minutes: 5
+        uses: aquaproj/aqua-installer@7c7338067bdb97d5bea2acc82b5870afca470d18 # v2.3.0
+        with:
+          aqua_version: v2.23.1
       - name: Run taplo
         timeout-minutes: 3
-        uses: yisonPylkita/gh-action-toml-linter@9964c737c253df1f31bdcceca95c00bc0d668304 # 0.1.9
+        run: taplo format --check
