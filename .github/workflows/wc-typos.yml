@@ -1,0 +1,21 @@
+---
+name: Run typos
+
+on: workflow_call
+
+jobs:
+  typos:
+    name: Run typos
+    runs-on: ${{ vars.RUNNER_AMD }}
+    timeout-minutes: 8
+    permissions:
+      contents: read
+      id-token: write
+      pull-requests: write
+    steps:
+      - name: Checkout
+        timeout-minutes: 3
+        uses: actions/checkout@b4ffde65f46336ab88eb53be808477a3936bae11 # v4.1.1
+      - name: typos
+        timeout-minutes: 5
+        uses: crate-ci/typos@b63f421581dce830bda2f597a678cb7776b41877 # v1.18.2

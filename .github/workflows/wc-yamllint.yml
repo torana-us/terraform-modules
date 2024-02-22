@@ -1,0 +1,25 @@
+---
+name: Run yamllint with reviewdog
+
+on: workflow_call
+
+jobs:
+  yamllint:
+    name: Run yamllint with reviewdog
+    runs-on: ${{ vars.RUNNER_AMD }}
+    timeout-minutes: 8
+    permissions:
+      contents: read
+      id-token: write
+      pull-requests: write
+    steps:
+      - name: Checkout
+        timeout-minutes: 3
+        uses: actions/checkout@b4ffde65f46336ab88eb53be808477a3936bae11 # v4.1.1
+      - name: Run yamllint with reviewdog
+        timeout-minutes: 5
+        uses: reviewdog/action-yamllint@c247c50238c06b3127fc83dc3012b5f056ef8ff9 # v1.10.0
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          reporter: github-pr-review
+          fail_on_error: true

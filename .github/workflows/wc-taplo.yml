@@ -1,0 +1,21 @@
+---
+name: Run taplo
+
+on: workflow_call
+
+jobs:
+  taplo:
+    name: Run taplo
+    runs-on: ${{ vars.RUNNER_AMD }}
+    timeout-minutes: 6
+    permissions:
+      contents: read
+      id-token: write
+      pull-requests: write
+    steps:
+      - name: Checkout
+        timeout-minutes: 3
+        uses: actions/checkout@b4ffde65f46336ab88eb53be808477a3936bae11 # v4.1.1
+      - name: Run taplo
+        timeout-minutes: 3
+        uses: yisonPylkita/gh-action-toml-linter@9964c737c253df1f31bdcceca95c00bc0d668304 # 0.1.9
