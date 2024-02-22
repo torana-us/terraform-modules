@@ -13,6 +13,7 @@ jobs:
       ghalint: ${{ steps.changes.outputs.ghalint_any_changed == 'true' }}
       taplo: ${{ steps.changes.outputs.taplo_any_changed == 'true' }}
       yamllint: ${{ steps.changes.outputs.yamllint_any_changed == 'true' }}
+      terraform: ${{ steps.changes.outputs.terraform_any_changed == 'true' }}
     runs-on: ubuntu-latest
     permissions:
       contents: read
@@ -39,6 +40,9 @@ jobs:
             yamllint:
               - '.github/workflows/*.{yaml,yml}'
               - '*.{yaml,yml}'
+            terraform:
+              - '**.tf'
+              - '**.hcl'
 
   markdownlint:
     needs: path-filter
@@ -98,3 +102,15 @@ jobs:
       id-token: write
       contents: read
       pull-requests: write
+
+  terraform:
+    uses: ./.github/workflows/wc-terraform.yml
+    permissions:
+      id-token: write
+      contents: read
+      pull-requests: write
+    with:
+      tflint_config_path: ".tflint.hcl"
+    secrets:
+      token: ${{ secrets.PAT }}
+

@@ -1,0 +1,152 @@
+---
+on:
+  workflow_call:
+    inputs:
+      tflint_config_path:
+        required: true
+        type: string
+    secrets:
+      token:
+        required: true
+
+jobs:
+  get_diff:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    timeout-minutes: 5
+    outputs:
+      diff_files: ${{ env.GIT_DIFF_FILTERED }}
+      diff_dirs: ${{ env.unique_dir }}
+    steps:
+      - uses: actions/checkout@b4ffde65f46336ab88eb53be808477a3936bae11 # v4.1.1
+        with:
+          fetch-depth: 0
+      - name: target branch
+        id: target_branch
+        run: |
+          set -xv
+          {
+            echo "branch=$GITHUB_BASE_REF"
+            echo "from=$origin/$GITHUB_BASE_REF"
+            echo "to=${GITHUB_REF/refs\//}"
+          } >> "$GITHUB_OUTPUT"
+      - name: get diff
+        run: |
+          set -xv
+          dir=$(git diff --diff-filter="AMRCD" \
+                  --name-only \
+                  "${{ steps.target_branch.outputs.from }}...${{ steps.target_branch.outputs.to }}" \
+                  -- "**.tf" \
+                  | xargs dirname \
+                  | sort \
+                  | uniq \
+                  | grep -v modules \
+                  | tr "\n" " "
+               )
+          echo "unique_dir=$dir" >> "$GITHUB_ENV"
+
+  fmt:
+    runs-on: ubuntu-latest
+    permissions:
+      id-token: write
+      contents: read
+    timeout-minutes: 10
+    if: needs.get_diff.outputs.diff_files
+    needs: ["get_diff"]
+    steps:
+      - uses: actions/checkout@b4ffde65f46336ab88eb53be808477a3936bae11 # v4.1.1
+      - uses: aquaproj/aqua-installer@7c7338067bdb97d5bea2acc82b5870afca470d18 # v2.3.0
+        with:
+          aqua_version: v2.23.1
+      - name: fmt
+        run: |
+          echo ${{ needs.get_diff.outputs.diff_files }} | xargs terraform fmt -check -diff
+
+  validate:
+    runs-on: ubuntu-latest
+    permissions:
+      id-token: write
+      contents: read
+    timeout-minutes: 10
+    if: needs.get_diff.outputs.diff_dirs
+    needs: ["get_diff"]
+    steps:
+      - uses: actions/checkout@b4ffde65f46336ab88eb53be808477a3936bae11 # v4.1.1
+      - uses: aquaproj/aqua-installer@7c7338067bdb97d5bea2acc82b5870afca470d18 # v2.3.0
+        with:
+          aqua_version: v2.23.1
+      - name: settings git config
+        run: git config --global url."https://oauth2:${{ secrets.token }}@github.com".insteadOf https://github.com
+      - name: validate
+        run: |
+          echo ${{ needs.get_diff.outputs.diff_dirs }} \
+          | tr " " "\n" \
+          | xargs -I{} bash -c 'cd {} && terraform init -backend=false && terraform validate'
+
+  tflint:
+    runs-on: ubuntu-latest
+    permissions:
+      id-token: write
+      contents: read
+    timeout-minutes: 10
+    if: needs.get_diff.outputs.diff_dirs
+    needs: ["get_diff"]
+    steps:
+      - uses: actions/checkout@b4ffde65f46336ab88eb53be808477a3936bae11 # v4.1.1
+      - uses: aquaproj/aqua-installer@7c7338067bdb97d5bea2acc82b5870afca470d18 # v2.3.0
+        with:
+          aqua_version: v2.23.1
+      - name: settings git config
+        run: git config --global url."https://oauth2:${{ secrets.token }}@github.com".insteadOf https://github.com
+      - name: tflint init
+        run: tflint --init -c ${{ inputs.tflint_config_path }}
+      - name: run tflint
+        run: |
+          echo ${{ needs.get_diff.outputs.diff_dirs }} \
+          | tr " " "\n" \
+          | xargs -I{} bash -c 'cd {} && terraform init -backend=false  && tflint -c ${{ github.workspace }}/${{ inputs.tflint_config_path }}'
+
+  trivy:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    timeout-minutes: 10
+    if: needs.get_diff.outputs.diff_dirs
+    needs: ["get_diff"]
+    steps:
+      - uses: actions/checkout@b4ffde65f46336ab88eb53be808477a3936bae11 # v4.1.1
+      - name: Run Trivy vulnerability scanner in IaC mode
+        uses: aquasecurity/trivy-action@84384bd6e777ef152729993b8145ea352e9dd3ef # 0.17.0
+        with:
+          scan-type: 'config'
+          hide-progress: false
+          format: 'table'
+          exit-code: '1'
+          ignore-unfixed: true
+          severity: 'CRITICAL,HIGH'
+          trivy-config: .trivy.yml
+
+  docs:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    timeout-minutes: 10
+    if: needs.get_diff.outputs.diff_dirs
+    needs: ["get_diff"]
+    strategy:
+      fail-fast: false
+      matrix:
+        target_dir: ${{ fromJson(needs.get_diff.outputs.diff_dirs) }}
+    steps:
+      - uses: actions/checkout@b4ffde65f46336ab88eb53be808477a3936bae11 # v4
+      - uses: aquaproj/aqua-installer@7c7338067bdb97d5bea2acc82b5870afca470d18 # v2.3.0
+        with:
+          aqua_version: v2.23.1
+      - name: Render terraform docs and push changes back to PR
+        run: terraform-docs markdown ${{ matrix.target_dir }} --output-file README.md
+      - run: |
+          if [ "$(git status -s)" != "" ]; then
+            git --no-pager diff
+            exit 1
+          fi
