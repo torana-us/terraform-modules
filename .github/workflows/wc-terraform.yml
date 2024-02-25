@@ -28,7 +28,7 @@ jobs:
           set -xv
           {
             echo "branch=$GITHUB_BASE_REF"
-            echo "from=$origin/$GITHUB_BASE_REF"
+            echo "from=origin/$GITHUB_BASE_REF"
             echo "to=HEAD"
           } >> "$GITHUB_OUTPUT"
       - name: get diff
