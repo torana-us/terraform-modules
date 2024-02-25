@@ -12,15 +12,6 @@ resource "aws_ecs_task_definition" "this" {
     "FARGATE"
   ]
 
-  track_latest = true
-
-  # volume {
-  # }
-
-  # Not used in fargate
-  # placement_constraints {
-  # }
-
   tags = merge({
     "Name" = var.task_name
   }, var.tags)
