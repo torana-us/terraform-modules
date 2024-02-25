@@ -16,7 +16,6 @@ jobs:
       contents: read
     timeout-minutes: 5
     outputs:
-      diff_files: ${{ env.GIT_DIFF_FILTERED }}
       diff_dirs: ${{ env.unique_dir }}
     steps:
       - uses: actions/checkout@b4ffde65f46336ab88eb53be808477a3936bae11 # v4.1.1
@@ -52,7 +51,6 @@ jobs:
       id-token: write
       contents: read
     timeout-minutes: 10
-    if: needs.get_diff.outputs.diff_files
     needs: ["get_diff"]
     steps:
       - uses: actions/checkout@b4ffde65f46336ab88eb53be808477a3936bae11 # v4.1.1
@@ -61,7 +59,7 @@ jobs:
           aqua_version: v2.23.1
       - name: fmt
         run: |
-          echo ${{ needs.get_diff.outputs.diff_files }} | xargs terraform fmt -check -diff
+          terraform fmt -check -recursive
 
   validate:
     runs-on: ubuntu-latest
