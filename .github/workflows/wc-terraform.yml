@@ -17,6 +17,7 @@ jobs:
     timeout-minutes: 5
     outputs:
       diff_dirs: ${{ env.unique_dir }}
+      diff_dirs_json: ${{ env.unique_dir_json }}
     steps:
       - uses: actions/checkout@b4ffde65f46336ab88eb53be808477a3936bae11 # v4.1.1
         with:
@@ -44,6 +45,10 @@ jobs:
                   | tr "\n" " "
                )
           echo "unique_dir=$dir" >> "$GITHUB_ENV"
+          # shellcheck disable=SC2016
+          dir_json=$(echo "$dir" \
+                       | xargs jq -nc --args '$ARGS.positional')
+          echo "unique_dir_json=$dir_json" >> "$GITHUB_ENV"
 
   fmt:
     runs-on: ubuntu-latest
@@ -130,12 +135,12 @@ jobs:
     permissions:
       contents: read
     timeout-minutes: 10
-    if: needs.get_diff.outputs.diff_dirs
+    if: needs.get_diff.outputs.diff_dirs_json
     needs: ["get_diff"]
     strategy:
       fail-fast: false
       matrix:
-        target_dir: ${{ fromJson(needs.get_diff.outputs.diff_dirs) }}
+        target_dir: ${{ fromJson(needs.get_diff.outputs.diff_dirs_json) }}
     steps:
       - uses: actions/checkout@b4ffde65f46336ab88eb53be808477a3936bae11 # v4
       - uses: aquaproj/aqua-installer@7c7338067bdb97d5bea2acc82b5870afca470d18 # v2.3.0
