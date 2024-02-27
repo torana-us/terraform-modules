@@ -77,7 +77,6 @@ resource "aws_iam_policy" "datadog_logs_forwarder_failed_logs" {
   policy = data.aws_iam_policy_document.datadog_logs_forwarder_failed_logs.json
 }
 
-#tfsec:ignore:aws-iam-no-policy-wildcards TODO: HIGH
 data "aws_iam_policy_document" "datadog_logs_forwarder_failed_logs" {
   statement {
     actions = [
@@ -100,7 +99,6 @@ data "aws_iam_policy_document" "datadog_logs_forwarder_failed_logs" {
   }
 }
 
-#tfsec:ignore:aws-cloudwatch-log-group-customer-key TODO:LOW
 resource "aws_cloudwatch_log_group" "datadog_logs_forwarder" {
   name = "/aws/kinesisfirehose/datadog-logs-forwarder-${var.env}"
 }

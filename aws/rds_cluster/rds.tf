@@ -35,10 +35,9 @@ resource "aws_rds_cluster_instance" "this" {
   identifier         = each.key
   cluster_identifier = aws_rds_cluster.this.id
 
-  engine         = aws_rds_cluster.this.engine
-  engine_version = aws_rds_cluster.this.engine_version
-  instance_class = var.instance_class
-  # tfsec:ignore:aws-rds-enable-performance-insights todo: LOW
+  engine                       = aws_rds_cluster.this.engine
+  engine_version               = aws_rds_cluster.this.engine_version
+  instance_class               = var.instance_class
   performance_insights_enabled = each.value.performance_insights_enabled
   promotion_tier               = each.value.tier
   ca_cert_identifier           = "rds-ca-ecc384-g1"
