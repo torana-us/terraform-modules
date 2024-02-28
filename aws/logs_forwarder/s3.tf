@@ -1,8 +1,3 @@
-#tfsec:ignore:aws-iam-no-policy-wildcards TODO:HIGH
-#tfsec:ignore:aws-s3-enable-bucket-encryption TODO:HIGH
-#tfsec:ignore:aws-s3-encryption-customer-key TODO:HIGH
-#tfsec:ignore:aws-s3-enable-bucket-logging TODO:MEDIUM
-#tfsec:ignore:aws-s3-enable-versioning TODO:MEDIUM
 resource "aws_s3_bucket" "datadog_logs_forwarder_failed_logs" {
   bucket = "datadog-logs-forwarder-failed-logs-${var.stream_name_suffix}"
 }
