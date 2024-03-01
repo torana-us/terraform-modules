@@ -56,6 +56,7 @@ jobs:
       id-token: write
       contents: read
     timeout-minutes: 10
+    if: needs.get_diff.outputs.diff_dirs
     needs: ["get_diff"]
     steps:
       - uses: actions/checkout@b4ffde65f46336ab88eb53be808477a3936bae11 # v4.1.1
@@ -135,7 +136,7 @@ jobs:
     permissions:
       contents: read
     timeout-minutes: 10
-    if: needs.get_diff.outputs.diff_dirs_json
+    if: needs.get_diff.outputs.diff_dirs
     needs: ["get_diff"]
     strategy:
       fail-fast: false
