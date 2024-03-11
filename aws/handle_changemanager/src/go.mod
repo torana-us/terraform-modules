@@ -6,11 +6,12 @@ require (
 	github.com/aws/aws-lambda-go v1.46.0
 	github.com/aws/aws-sdk-go-v2/config v1.27.7
 	github.com/aws/aws-sdk-go-v2/service/ssm v1.49.2
-	github.com/go-sql-driver/mysql v1.7.1
+	github.com/go-sql-driver/mysql v1.8.0
 	go.uber.org/zap v1.27.0
 )
 
 require (
+	filippo.io/edwards25519 v1.1.0 // indirect
 	github.com/aws/aws-sdk-go-v2 v1.25.3 // indirect
 	github.com/aws/aws-sdk-go-v2/credentials v1.17.7 // indirect
 	github.com/aws/aws-sdk-go-v2/feature/ec2/imds v1.15.3 // indirect
