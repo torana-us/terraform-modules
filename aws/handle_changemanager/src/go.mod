@@ -5,7 +5,7 @@ go 1.19
 require (
 	github.com/aws/aws-lambda-go v1.46.0
 	github.com/aws/aws-sdk-go-v2/config v1.27.7
-	github.com/aws/aws-sdk-go-v2/service/ssm v1.49.2
+	github.com/aws/aws-sdk-go-v2/service/ssm v1.49.3
 	github.com/go-sql-driver/mysql v1.8.0
 	go.uber.org/zap v1.27.0
 )
