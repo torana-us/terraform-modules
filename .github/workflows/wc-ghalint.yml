@@ -6,7 +6,7 @@ on: workflow_call
 jobs:
   ghalint:
     # Validate GitHub Actions Workflows by ghalint.
-    runs-on: ${{ vars.RUNNER_AMD }}
+    runs-on: ubuntu-latest
     permissions:
       contents: read
       id-token: write
