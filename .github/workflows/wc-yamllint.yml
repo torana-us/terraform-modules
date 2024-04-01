@@ -6,7 +6,7 @@ on: workflow_call
 jobs:
   yamllint:
     name: Run yamllint with reviewdog
-    runs-on: ${{ vars.RUNNER_AMD }}
+    runs-on: ubuntu-latest
     timeout-minutes: 8
     permissions:
       contents: read

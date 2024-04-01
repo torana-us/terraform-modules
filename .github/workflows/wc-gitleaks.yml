@@ -6,7 +6,7 @@ on: workflow_call
 jobs:
   gitleaks:
     name: Run gitleaks
-    runs-on: ${{ vars.RUNNER_AMD }}
+    runs-on: ubuntu-latest
     timeout-minutes: 13
     permissions:
       contents: read
