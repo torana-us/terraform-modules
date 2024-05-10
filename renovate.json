@@ -2,10 +2,7 @@
     "$schema": "https://docs.renovatebot.com/renovate-schema.json",
     "extends": [
         "github>aquaproj/aqua-renovate-config#2.3.0",
-        "config:recommended",
-        "docker:pinDigests",
-        "helpers:pinGitHubActionDigests",
-        ":pinDevDependencies"
+        "config:best-practices"
     ],
     "packageRules": [
         {
