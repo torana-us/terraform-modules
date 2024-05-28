@@ -13,7 +13,7 @@ packages:
   - name: hashicorp/terraform@v1.8.4
   - name: terraform-linters/tflint@v0.51.1
   - name: terraform-docs/terraform-docs@v0.17.0
-  - name: rhysd/actionlint@v1.7.0
+  - name: rhysd/actionlint@v1.7.1
   - name: zricethezav/gitleaks@v8.18.2
   - name: evilmartians/lefthook@v1.6.13
   - name: koalaman/shellcheck@v0.10.0
