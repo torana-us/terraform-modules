@@ -2,7 +2,7 @@ version: '3.8'
 
 services:
   db:
-    image: mysql:8.0.37@sha256:7cf8a10b3c17273a47c5cd876cdb790c551012b40b36909b8ca0d9ab5721ed2c
+    image: mysql:8.0.37@sha256:5c26f41e64c9159b1c485182575d6ebcd607ebf65fe68a26a71ca241c7748377
     environment:
       MYSQL_ROOT_PASSWORD: example_password
       MYSQL_DATABASE: example_database
