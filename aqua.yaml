@@ -24,3 +24,4 @@ packages:
   - name: tamasfe/taplo@0.8.1
   - name: aquasecurity/trivy@v0.53.0
   - name: suzuki-shunsuke/ghalint@v0.2.12
+  - name: suzuki-shunsuke/ghatm@v0.3.1
