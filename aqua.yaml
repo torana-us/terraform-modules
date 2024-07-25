@@ -17,7 +17,7 @@ packages:
   - name: zricethezav/gitleaks@v8.18.4
   - name: evilmartians/lefthook@v1.7.7
   - name: koalaman/shellcheck@v0.10.0
-  - name: crate-ci/typos@v1.23.3
+  - name: crate-ci/typos@v1.23.4
   - name: mvdan/sh@v3.8.0
   - name: terraform-linters/tflint@v0.52.0
   - name: suzuki-shunsuke/tfcmt@v4.11.0
