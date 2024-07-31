@@ -22,6 +22,6 @@ packages:
   - name: terraform-linters/tflint@v0.52.0
   - name: suzuki-shunsuke/tfcmt@v4.11.0
   - name: tamasfe/taplo@0.9.2
-  - name: aquasecurity/trivy@v0.53.0
+  - name: aquasecurity/trivy@v0.54.0
   - name: suzuki-shunsuke/ghalint@v0.2.12
   - name: suzuki-shunsuke/ghatm@v0.3.1
