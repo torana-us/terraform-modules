@@ -11,15 +11,15 @@ registries:
     ref: v4.213.1 # renovate: depName=aquaproj/aqua-registry
 packages:
   - name: hashicorp/terraform@v1.9.4
-  - name: terraform-linters/tflint@v0.52.0
+  - name: terraform-linters/tflint@v0.53.0
   - name: terraform-docs/terraform-docs@v0.18.0
   - name: rhysd/actionlint@v1.7.1
   - name: zricethezav/gitleaks@v8.18.4
-  - name: evilmartians/lefthook@v1.7.13
+  - name: evilmartians/lefthook@v1.7.14
   - name: koalaman/shellcheck@v0.10.0
   - name: crate-ci/typos@v1.23.6
   - name: mvdan/sh@v3.9.0
-  - name: terraform-linters/tflint@v0.52.0
+  - name: terraform-linters/tflint@v0.53.0
   - name: suzuki-shunsuke/tfcmt@v4.13.0
   - name: tamasfe/taplo@0.9.3
   - name: aquasecurity/trivy@v0.54.1
