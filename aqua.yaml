@@ -8,7 +8,7 @@
 #   - all
 registries:
   - type: standard
-    ref: v4.239.0 # renovate: depName=aquaproj/aqua-registry
+    ref: v4.239.1 # renovate: depName=aquaproj/aqua-registry
 packages:
   - name: hashicorp/terraform@v1.9.8
   - name: terraform-linters/tflint@v0.53.0
@@ -17,7 +17,7 @@ packages:
   - name: zricethezav/gitleaks@v8.21.1
   - name: evilmartians/lefthook@v1.8.1
   - name: koalaman/shellcheck@v0.10.0
-  - name: crate-ci/typos@v1.26.1
+  - name: crate-ci/typos@v1.26.2
   - name: mvdan/sh@v3.10.0
   - name: terraform-linters/tflint@v0.53.0
   - name: suzuki-shunsuke/tfcmt@v4.14.0
