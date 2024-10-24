@@ -1,12 +1,16 @@
 resource "aws_iam_role" "this" {
   assume_role_policy   = data.aws_iam_policy_document.base.json
   name                 = var.name
-  managed_policy_arns  = var.policy_arns
   max_session_duration = var.max_session_duration
 
   tags = {
     "Name" = var.name
   }
+}
+
+resource "aws_iam_role_policy_attachments_exclusive" "this" {
+  role_name   = aws_iam_role.this.name
+  policy_arns = var.policy_arns
 }
 
 data "aws_iam_policy_document" "base" {
