@@ -10,7 +10,7 @@ resource "aws_elasticache_replication_group" "this" {
   node_type                  = var.node_type
   description                = local.description
   engine_version             = var.engine_version
-  engine                     = "redis"
+  engine                     = var.engine
   port                       = var.port
   num_node_groups            = var.num_node_groups
   replicas_per_node_group    = var.replicas_per_node_group

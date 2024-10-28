@@ -13,6 +13,12 @@ variable "description" {
   default = null
 }
 
+variable "engine" {
+  type        = string
+  description = "redis | valkey"
+  default     = "redis"
+}
+
 variable "engine_version" {
   type        = string
   description = "redis version"
