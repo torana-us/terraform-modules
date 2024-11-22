@@ -60,7 +60,7 @@ jobs:
     needs: ["get_diff"]
     steps:
       - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
-      - uses: aquaproj/aqua-installer@e6160e5a751bbcbd337a834eb75c15ba9ca206ae # v3.0.2
+      - uses: aquaproj/aqua-installer@f13c5d2f0357708d85477aabe50fd3f725528745 # v3.1.0
         with:
           aqua_version: v2.38.0
       - name: fmt
@@ -77,7 +77,7 @@ jobs:
     needs: ["get_diff"]
     steps:
       - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
-      - uses: aquaproj/aqua-installer@e6160e5a751bbcbd337a834eb75c15ba9ca206ae # v3.0.2
+      - uses: aquaproj/aqua-installer@f13c5d2f0357708d85477aabe50fd3f725528745 # v3.1.0
         with:
           aqua_version: v2.38.0
       - name: settings git config
@@ -98,7 +98,7 @@ jobs:
     needs: ["get_diff"]
     steps:
       - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
-      - uses: aquaproj/aqua-installer@e6160e5a751bbcbd337a834eb75c15ba9ca206ae # v3.0.2
+      - uses: aquaproj/aqua-installer@f13c5d2f0357708d85477aabe50fd3f725528745 # v3.1.0
         with:
           aqua_version: v2.38.0
       - name: settings git config
@@ -144,7 +144,7 @@ jobs:
         target_dir: ${{ fromJson(needs.get_diff.outputs.diff_dirs_json) }}
     steps:
       - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4
-      - uses: aquaproj/aqua-installer@e6160e5a751bbcbd337a834eb75c15ba9ca206ae # v3.0.2
+      - uses: aquaproj/aqua-installer@f13c5d2f0357708d85477aabe50fd3f725528745 # v3.1.0
         with:
           aqua_version: v2.38.0
       - name: Render terraform docs and push changes back to PR
