@@ -20,7 +20,7 @@ packages:
   - name: crate-ci/typos@v1.29.5
   - name: mvdan/sh@v3.10.0
   - name: terraform-linters/tflint@v0.55.1
-  - name: suzuki-shunsuke/tfcmt@v4.14.1
+  - name: suzuki-shunsuke/tfcmt@v4.14.2
   - name: tamasfe/taplo@0.9.3
   - name: aquasecurity/trivy@v0.59.0
   - name: suzuki-shunsuke/ghalint@v1.2.1
