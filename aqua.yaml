@@ -23,5 +23,5 @@ packages:
   - name: suzuki-shunsuke/tfcmt@v4.14.2
   - name: tamasfe/taplo@0.9.3
   - name: aquasecurity/trivy@v0.59.1
-  - name: suzuki-shunsuke/ghalint@v1.2.1
+  - name: suzuki-shunsuke/ghalint@v1.2.3
   - name: suzuki-shunsuke/ghatm@v0.3.3
