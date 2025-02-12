@@ -62,7 +62,7 @@ jobs:
       - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
       - uses: aquaproj/aqua-installer@e2d0136abcf70b7a2f6f505720640750557c4b33 # v3.1.1
         with:
-          aqua_version: v2.43.3
+          aqua_version: v2.44.0
       - name: fmt
         run: |
           terraform fmt -check -recursive
@@ -79,7 +79,7 @@ jobs:
       - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
       - uses: aquaproj/aqua-installer@e2d0136abcf70b7a2f6f505720640750557c4b33 # v3.1.1
         with:
-          aqua_version: v2.43.3
+          aqua_version: v2.44.0
       - name: settings git config
         run: git config --global url."https://oauth2:${{ secrets.token }}@github.com".insteadOf https://github.com
       - name: validate
@@ -100,7 +100,7 @@ jobs:
       - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
       - uses: aquaproj/aqua-installer@e2d0136abcf70b7a2f6f505720640750557c4b33 # v3.1.1
         with:
-          aqua_version: v2.43.3
+          aqua_version: v2.44.0
       - name: settings git config
         run: git config --global url."https://oauth2:${{ secrets.token }}@github.com".insteadOf https://github.com
       - name: tflint init
@@ -146,7 +146,7 @@ jobs:
       - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4
       - uses: aquaproj/aqua-installer@e2d0136abcf70b7a2f6f505720640750557c4b33 # v3.1.1
         with:
-          aqua_version: v2.43.3
+          aqua_version: v2.44.0
       - name: Render terraform docs and push changes back to PR
         run: terraform-docs markdown ${{ matrix.target_dir }} --output-file README.md
       - run: |
