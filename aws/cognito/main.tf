@@ -29,6 +29,9 @@ resource "aws_cognito_user_pool" "this" {
     }
   }
 
+  password_policy {
+    temporary_password_validity_days = 30
+  }
 }
 
 resource "aws_cognito_user_pool_domain" "this" {
