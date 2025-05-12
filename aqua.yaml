@@ -14,7 +14,7 @@ packages:
   - name: terraform-linters/tflint@v0.57.0
   - name: terraform-docs/terraform-docs@v0.20.0
   - name: rhysd/actionlint@v1.7.7
-  - name: zricethezav/gitleaks@v8.25.1
+  - name: zricethezav/gitleaks@v8.26.0
   - name: evilmartians/lefthook@v1.11.12
   - name: koalaman/shellcheck@v0.10.0
   - name: crate-ci/typos@v1.32.0
