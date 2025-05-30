@@ -8,7 +8,7 @@
 #   - all
 registries:
   - type: standard
-    ref: v4.373.0 # renovate: depName=aquaproj/aqua-registry
+    ref: v4.374.0 # renovate: depName=aquaproj/aqua-registry
 packages:
   - name: hashicorp/terraform@v1.11.4
   - name: terraform-linters/tflint@v0.58.0
@@ -23,5 +23,5 @@ packages:
   - name: suzuki-shunsuke/tfcmt@v4.14.7
   - name: tamasfe/taplo@0.10.0
   - name: aquasecurity/trivy@v0.63.0
-  - name: suzuki-shunsuke/ghalint@v1.4.0
+  - name: suzuki-shunsuke/ghalint@v1.4.1
   - name: suzuki-shunsuke/ghatm@v0.3.5
