@@ -2,7 +2,7 @@ module cc
 
 go 1.22
 
-toolchain go1.24.5
+toolchain go1.24.6
 
 require (
 	github.com/aws/aws-lambda-go v1.49.0
