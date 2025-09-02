@@ -18,6 +18,8 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@08c6903cd8c0fde910a37f88322edcfb5dd907a8 # v5
+        with:
+          persist-credentials: false
       - name: generate tag
         id: gen_tag
         run: |
@@ -26,8 +28,10 @@ jobs:
           echo "tag=$tag" >> "$GITHUB_OUTPUT"
       - name: push tag
         run: |
-          git tag ${{ steps.gen_tag.outputs.tag }}
-          git push origin ${{ steps.gen_tag.outputs.tag }}
+          git tag "${STEPS_GEN_TAG_OUTPUTS_TAG}"
+          git push origin "${STEPS_GEN_TAG_OUTPUTS_TAG}"
+        env:
+          STEPS_GEN_TAG_OUTPUTS_TAG: ${{ steps.gen_tag.outputs.tag }}
       
       - uses: release-drafter/release-drafter@b1476f6e6eb133afa41ed8589daba6dc69b4d3f5 # v6
         with:
