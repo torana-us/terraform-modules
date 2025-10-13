@@ -5,7 +5,7 @@ go 1.22
 toolchain go1.25.1
 
 require (
-	github.com/aws/aws-lambda-go v1.49.0
+	github.com/aws/aws-lambda-go v1.50.0
 	github.com/aws/aws-sdk-go-v2/config v1.31.12
 	github.com/aws/aws-sdk-go-v2/service/ssm v1.65.1
 	github.com/go-sql-driver/mysql v1.9.3
