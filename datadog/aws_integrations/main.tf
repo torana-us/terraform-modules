@@ -122,7 +122,6 @@ resource "datadog_integration_aws" "this" {
     "sagemakertrainingjobs"          = false
     "sagemakertransformjobs"         = false
     "sagemakerworkteam"              = false
-    "service_quotas"                 = false
     "ses"                            = false
     "shield"                         = false
     "sns"                            = false
