@@ -19,7 +19,7 @@ jobs:
       diff_dirs: ${{ env.unique_dir }}
       diff_dirs_json: ${{ env.unique_dir_json }}
     steps:
-      - uses: actions/checkout@08c6903cd8c0fde910a37f88322edcfb5dd907a8 # v5.0.0
+      - uses: actions/checkout@1af3b93b6815bc44a9784bd300feb67ff0d1eeb3 # v6.0.0
         with:
           fetch-depth: 0
           persist-credentials: false
@@ -63,12 +63,12 @@ jobs:
     if: needs.get_diff.outputs.diff_dirs
     needs: ["get_diff"]
     steps:
-      - uses: actions/checkout@08c6903cd8c0fde910a37f88322edcfb5dd907a8 # v5.0.0
+      - uses: actions/checkout@1af3b93b6815bc44a9784bd300feb67ff0d1eeb3 # v6.0.0
         with:
           persist-credentials: false
-      - uses: aquaproj/aqua-installer@d1fe50798dbadd4eb5b98957290ca175f6b4870f # v4.0.2
+      - uses: aquaproj/aqua-installer@11dd79b4e498d471a9385aa9fb7f62bb5f52a73c # v4.0.4
         with:
-          aqua_version: v2.53.9
+          aqua_version: v2.55.2
       - name: fmt
         run: |
           terraform fmt -check -recursive
@@ -82,12 +82,12 @@ jobs:
     if: needs.get_diff.outputs.diff_dirs
     needs: ["get_diff"]
     steps:
-      - uses: actions/checkout@08c6903cd8c0fde910a37f88322edcfb5dd907a8 # v5.0.0
+      - uses: actions/checkout@1af3b93b6815bc44a9784bd300feb67ff0d1eeb3 # v6.0.0
         with:
           persist-credentials: false
-      - uses: aquaproj/aqua-installer@d1fe50798dbadd4eb5b98957290ca175f6b4870f # v4.0.2
+      - uses: aquaproj/aqua-installer@11dd79b4e498d471a9385aa9fb7f62bb5f52a73c # v4.0.4
         with:
-          aqua_version: v2.53.9
+          aqua_version: v2.55.2
       - name: settings git config
         run: git config --global url."https://oauth2:${{ secrets.token }}@github.com".insteadOf https://github.com
       - name: validate
@@ -107,12 +107,12 @@ jobs:
     if: needs.get_diff.outputs.diff_dirs
     needs: ["get_diff"]
     steps:
-      - uses: actions/checkout@08c6903cd8c0fde910a37f88322edcfb5dd907a8 # v5.0.0
+      - uses: actions/checkout@1af3b93b6815bc44a9784bd300feb67ff0d1eeb3 # v6.0.0
         with:
           persist-credentials: false
-      - uses: aquaproj/aqua-installer@d1fe50798dbadd4eb5b98957290ca175f6b4870f # v4.0.2
+      - uses: aquaproj/aqua-installer@11dd79b4e498d471a9385aa9fb7f62bb5f52a73c # v4.0.4
         with:
-          aqua_version: v2.53.9
+          aqua_version: v2.55.2
       - name: settings git config
         run: git config --global url."https://oauth2:${{ secrets.token }}@github.com".insteadOf https://github.com
       - name: tflint init
@@ -136,11 +136,11 @@ jobs:
     if: needs.get_diff.outputs.diff_dirs
     needs: ["get_diff"]
     steps:
-      - uses: actions/checkout@08c6903cd8c0fde910a37f88322edcfb5dd907a8 # v5.0.0
+      - uses: actions/checkout@1af3b93b6815bc44a9784bd300feb67ff0d1eeb3 # v6.0.0
         with:
           persist-credentials: false
       - name: Run Trivy vulnerability scanner in IaC mode
-        uses: aquasecurity/trivy-action@f9424c10c36e288d5fa79bd3dfd1aeb2d6eae808 # 0.33.0
+        uses: aquasecurity/trivy-action@b6643a29fecd7f34b3597bc6acb0a98b03d33ff8 # 0.33.1
         with:
           scan-type: 'config'
           hide-progress: false
@@ -162,12 +162,12 @@ jobs:
       matrix:
         target_dir: ${{ fromJson(needs.get_diff.outputs.diff_dirs_json) }}
     steps:
-      - uses: actions/checkout@08c6903cd8c0fde910a37f88322edcfb5dd907a8 # v5
+      - uses: actions/checkout@1af3b93b6815bc44a9784bd300feb67ff0d1eeb3 # v6
         with:
           persist-credentials: false
-      - uses: aquaproj/aqua-installer@d1fe50798dbadd4eb5b98957290ca175f6b4870f # v4.0.2
+      - uses: aquaproj/aqua-installer@11dd79b4e498d471a9385aa9fb7f62bb5f52a73c # v4.0.4
         with:
-          aqua_version: v2.53.9
+          aqua_version: v2.55.2
       - name: Render terraform docs and push changes back to PR
         run: terraform-docs markdown "${MATRIX_TARGET_DIR}" --output-file README.md
         env:
