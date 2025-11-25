@@ -12,7 +12,7 @@
 
 | Name | Version |
 |------|---------|
-| <a name="provider_datadog"></a> [datadog](#provider\_datadog) | 3.81.0 |
+| <a name="provider_datadog"></a> [datadog](#provider\_datadog) | >= 3.14.0 |
 
 ## Modules
 
