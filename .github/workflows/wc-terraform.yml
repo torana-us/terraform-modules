@@ -22,6 +22,7 @@ jobs:
       - uses: actions/checkout@1af3b93b6815bc44a9784bd300feb67ff0d1eeb3 # v6.0.0
         with:
           fetch-depth: 0
+          persist-credentials: false
       - name: target branch
         id: target_branch
         run: |
@@ -36,7 +37,7 @@ jobs:
           set -xv
           dir=$(git diff --diff-filter="AMRCD" \
                   --name-only \
-                  "${{ steps.target_branch.outputs.from }}...${{ steps.target_branch.outputs.to }}" \
+                  "${STEPS_TARGET_BRANCH_OUTPUTS_FROM}...${STEPS_TARGET_BRANCH_OUTPUTS_TO}" \
                   -- "**.tf" \
                   | xargs dirname \
                   | sort \
@@ -49,6 +50,9 @@ jobs:
           dir_json=$(echo "$dir" \
                        | xargs jq -nc --args '$ARGS.positional')
           echo "unique_dir_json=$dir_json" >> "$GITHUB_ENV"
+        env:
+          STEPS_TARGET_BRANCH_OUTPUTS_FROM: ${{ steps.target_branch.outputs.from }}
+          STEPS_TARGET_BRANCH_OUTPUTS_TO: ${{ steps.target_branch.outputs.to }}
 
   fmt:
     runs-on: ubuntu-latest
@@ -60,6 +64,8 @@ jobs:
     needs: ["get_diff"]
     steps:
       - uses: actions/checkout@1af3b93b6815bc44a9784bd300feb67ff0d1eeb3 # v6.0.0
+        with:
+          persist-credentials: false
       - uses: aquaproj/aqua-installer@11dd79b4e498d471a9385aa9fb7f62bb5f52a73c # v4.0.4
         with:
           aqua_version: v2.55.2
@@ -77,6 +83,8 @@ jobs:
     needs: ["get_diff"]
     steps:
       - uses: actions/checkout@1af3b93b6815bc44a9784bd300feb67ff0d1eeb3 # v6.0.0
+        with:
+          persist-credentials: false
       - uses: aquaproj/aqua-installer@11dd79b4e498d471a9385aa9fb7f62bb5f52a73c # v4.0.4
         with:
           aqua_version: v2.55.2
@@ -84,9 +92,11 @@ jobs:
         run: git config --global url."https://oauth2:${{ secrets.token }}@github.com".insteadOf https://github.com
       - name: validate
         run: |
-          echo ${{ needs.get_diff.outputs.diff_dirs }} \
+          echo "${NEEDS_GET_DIFF_OUTPUTS_DIFF_DIRS}" \
           | tr " " "\n" \
           | xargs -I{} bash -c 'cd {} && terraform init -backend=false && terraform validate'
+        env:
+          NEEDS_GET_DIFF_OUTPUTS_DIFF_DIRS: ${{ needs.get_diff.outputs.diff_dirs }}
 
   tflint:
     runs-on: ubuntu-latest
@@ -98,18 +108,25 @@ jobs:
     needs: ["get_diff"]
     steps:
       - uses: actions/checkout@1af3b93b6815bc44a9784bd300feb67ff0d1eeb3 # v6.0.0
+        with:
+          persist-credentials: false
       - uses: aquaproj/aqua-installer@11dd79b4e498d471a9385aa9fb7f62bb5f52a73c # v4.0.4
         with:
           aqua_version: v2.55.2
       - name: settings git config
         run: git config --global url."https://oauth2:${{ secrets.token }}@github.com".insteadOf https://github.com
       - name: tflint init
-        run: tflint --init -c ${{ inputs.tflint_config_path }}
+        run: tflint --init -c "${INPUTS_TFLINT_CONFIG_PATH}"
+        env:
+          INPUTS_TFLINT_CONFIG_PATH: ${{ inputs.tflint_config_path }}
       - name: run tflint
         run: |
-          echo ${{ needs.get_diff.outputs.diff_dirs }} \
+          echo "${NEEDS_GET_DIFF_OUTPUTS_DIFF_DIRS}" \
           | tr " " "\n" \
-          | xargs -I{} bash -c 'cd {} && terraform init -backend=false  && tflint -c ${{ github.workspace }}/${{ inputs.tflint_config_path }}'
+          | xargs -I{} bash -c "cd {} && terraform init -backend=false  && tflint -c ${{ github.workspace }}/${INPUTS_TFLINT_CONFIG_PATH}"
+        env:
+          NEEDS_GET_DIFF_OUTPUTS_DIFF_DIRS: ${{ needs.get_diff.outputs.diff_dirs }}
+          INPUTS_TFLINT_CONFIG_PATH: ${{ inputs.tflint_config_path }}
 
   trivy:
     runs-on: ubuntu-latest
@@ -120,6 +137,8 @@ jobs:
     needs: ["get_diff"]
     steps:
       - uses: actions/checkout@1af3b93b6815bc44a9784bd300feb67ff0d1eeb3 # v6.0.0
+        with:
+          persist-credentials: false
       - name: Run Trivy vulnerability scanner in IaC mode
         uses: aquasecurity/trivy-action@b6643a29fecd7f34b3597bc6acb0a98b03d33ff8 # 0.33.1
         with:
@@ -144,11 +163,15 @@ jobs:
         target_dir: ${{ fromJson(needs.get_diff.outputs.diff_dirs_json) }}
     steps:
       - uses: actions/checkout@1af3b93b6815bc44a9784bd300feb67ff0d1eeb3 # v6
+        with:
+          persist-credentials: false
       - uses: aquaproj/aqua-installer@11dd79b4e498d471a9385aa9fb7f62bb5f52a73c # v4.0.4
         with:
           aqua_version: v2.55.2
       - name: Render terraform docs and push changes back to PR
-        run: terraform-docs markdown ${{ matrix.target_dir }} --output-file README.md
+        run: terraform-docs markdown "${MATRIX_TARGET_DIR}" --output-file README.md
+        env:
+          MATRIX_TARGET_DIR: ${{ matrix.target_dir }}
       - run: |
           if [ "$(git status -s)" != "" ]; then
             git --no-pager diff
