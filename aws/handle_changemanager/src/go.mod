@@ -7,7 +7,7 @@ toolchain go1.25.5
 require (
 	github.com/aws/aws-lambda-go v1.51.0
 	github.com/aws/aws-sdk-go-v2/config v1.32.5
-	github.com/aws/aws-sdk-go-v2/service/ssm v1.67.6
+	github.com/aws/aws-sdk-go-v2/service/ssm v1.67.7
 	github.com/go-sql-driver/mysql v1.9.3
 	go.uber.org/zap v1.27.1
 )
