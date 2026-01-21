@@ -68,7 +68,7 @@ jobs:
           persist-credentials: false
       - uses: aquaproj/aqua-installer@11dd79b4e498d471a9385aa9fb7f62bb5f52a73c # v4.0.4
         with:
-          aqua_version: v2.56.4
+          aqua_version: v2.56.5
       - name: fmt
         run: |
           terraform fmt -check -recursive
@@ -87,7 +87,7 @@ jobs:
           persist-credentials: false
       - uses: aquaproj/aqua-installer@11dd79b4e498d471a9385aa9fb7f62bb5f52a73c # v4.0.4
         with:
-          aqua_version: v2.56.4
+          aqua_version: v2.56.5
       - name: settings git config
         run: git config --global url."https://oauth2:${{ secrets.token }}@github.com".insteadOf https://github.com
       - name: validate
@@ -112,7 +112,7 @@ jobs:
           persist-credentials: false
       - uses: aquaproj/aqua-installer@11dd79b4e498d471a9385aa9fb7f62bb5f52a73c # v4.0.4
         with:
-          aqua_version: v2.56.4
+          aqua_version: v2.56.5
       - name: settings git config
         run: git config --global url."https://oauth2:${{ secrets.token }}@github.com".insteadOf https://github.com
       - name: tflint init
@@ -167,7 +167,7 @@ jobs:
           persist-credentials: false
       - uses: aquaproj/aqua-installer@11dd79b4e498d471a9385aa9fb7f62bb5f52a73c # v4.0.4
         with:
-          aqua_version: v2.56.4
+          aqua_version: v2.56.5
       - name: Render terraform docs and push changes back to PR
         run: terraform-docs markdown "${MATRIX_TARGET_DIR}" --output-file README.md
         env:
