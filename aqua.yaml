@@ -15,13 +15,13 @@ packages:
   - name: terraform-docs/terraform-docs@v0.21.0
   - name: rhysd/actionlint@v1.7.11
   - name: zricethezav/gitleaks@v8.30.0
-  - name: evilmartians/lefthook@v2.1.1
+  - name: evilmartians/lefthook@v2.1.2
   - name: koalaman/shellcheck@v0.11.0
   - name: crate-ci/typos@v1.44.0
   - name: mvdan/sh@v3.12.0
   - name: terraform-linters/tflint@v0.61.0
   - name: suzuki-shunsuke/tfcmt@v4.14.15
   - name: tamasfe/taplo@0.10.0
-  - name: aquasecurity/trivy@v0.69.1
+  - name: aquasecurity/trivy@v0.69.2
   - name: suzuki-shunsuke/ghalint@v1.5.5
   - name: suzuki-shunsuke/ghatm@v1.0.0
