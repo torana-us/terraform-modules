@@ -33,7 +33,7 @@ jobs:
         env:
           STEPS_GEN_TAG_OUTPUTS_TAG: ${{ steps.gen_tag.outputs.tag }}
       
-      - uses: release-drafter/release-drafter@b1476f6e6eb133afa41ed8589daba6dc69b4d3f5 # v6
+      - uses: release-drafter/release-drafter@139054aeaa9adc52ab36ddf67437541f039b88e2 # v7
         with:
           publish: true
           tag: ${{ steps.gen_tag.outputs.tag }}
